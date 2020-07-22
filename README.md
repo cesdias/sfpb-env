@@ -28,12 +28,12 @@ Atenção: esta instalação foi testada apenas em Linux e macOS. Para utilizar 
 
 - SSH
 ```console
-foo@bar# git clone git@github.com:arialab/sefazpb-infra.git
+foo@bar# git clone git@github.com:arialab/sefazpb-ambiente.git
 ```
 
 - HTTPS
 ```console
-foo@bar# git clone https://github.com/arialab/sefazpb-infra.git
+foo@bar# git clone https://github.com/arialab/sefazpb-ambiente.git
 ```
 
 3) Acesse o repositório clonado e prepare o script `setup.sh` para execução.
