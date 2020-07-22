@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  graphql-engine:
+    image: "hasura/graphql-engine:v1.3.0"
+    ports:
+      - target: 8080
+        published: 8080
+    depends_on:
+      - "postgres"
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: "postgres://hasurauser:quaevu8U@postgres:5432/datalake"
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: "startup, http-log, webhook-log, websocket-log, query-log"
+      HASURA_GRAPHQL_ADMIN_SECRET: "7f561b9fb979122aacc6ea95311c4a6986d7088d360ca26db6b0b93ce613fa28"
+      HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256","key":"IouHeDgirik0vhBkNw4iFQkUo3tzrwPYNGWHfCjDqsNujDcpV77xIeg24luLGq2F"}'
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "anonymous"
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
+    restart: "on-failure"
+
+  postgres:
+    build: .
+    ports:
+      - target: 5432
+        published: 5432
+    volumes:
+      - "pgdata:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_PASSWORD: "Aiveid7n"
+
+volumes:
+  pgdata:
