@@ -55,6 +55,6 @@ Usage: ./setup.sh <secret-key>
 
 Aguarde a preparação do ambiente e as instruções apresentadas ao final da execução do script `setup.sh`.
 
-## Exemplo de Preparação do Ambiente de Desenvolvimento
+## Vídeo da Execução do Script de Preparação do Ambiente de Desenvolvimento
 
-TODO: vídeo do asciinema
+[![asciicast](https://asciinema.org/a/P2tRAtVAKe3m64kbMz3TVR2Qp.svg)](https://asciinema.org/a/P2tRAtVAKe3m64kbMz3TVR2Qp)
