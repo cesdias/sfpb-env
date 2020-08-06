@@ -10,6 +10,7 @@ CREATE DATABASE datalake;
 REVOKE ALL ON DATABASE datalake FROM public;
 ALTER DATABASE datalake OWNER TO datalakeuser;
 GRANT CONNECT ON DATABASE datalake to datalakeuser;
+ALTER ROLE datalakeuser SET search_path TO public,app,appmask;
 
 -- change database and user
 \connect datalake datalakeuser
@@ -356,16 +357,11 @@ CREATE TABLE app.fatoitemnfe (
     nfadprod text
 );
 
+-- change database and user
+\connect datalake postgres
 
---ALTER SCHEMA app OWNER TO datalakeuser;
---ALTER TABLE app.label OWNER TO datalakeuser;
---ALTER TABLE app.fatonfe OWNER TO datalakeuser;
---ALTER TABLE app.fatoitemnfe OWNER TO datalakeuser;
-
---GRANT USAGE ON SCHEMA app TO datalakeuser;
---GRANT ALL ON ALL TABLES IN SCHEMA app TO datalakeuser;
---GRANT ALL ON ALL SEQUENCES IN SCHEMA app TO datalakeuser;
---GRANT ALL ON ALL FUNCTIONS IN SCHEMA app TO datalakeuser;
+-- privileges and permissions
+ALTER SCHEMA public OWNER TO datalakeuser;
 
 
 -- Anonymizer - see https://github.com/arialab/sefazpb-infra/tree/master/postgres/anonymizer
@@ -498,7 +494,6 @@ CREATE MATERIALIZED VIEW appmask.fatonfe AS SELECT
     anon.partial("CNAEEmit",2,$$*****$$,2) AS "CNAEEmit",
     anon.partial("CRTEmit",2,$$*****$$,2) AS "CRTEmit"
 FROM app.fatonfe;
-
 
 CREATE MATERIALIZED VIEW appmask.fatoitemnfe AS SELECT
     id,
@@ -719,16 +714,6 @@ CREATE MATERIALIZED VIEW appmask.fatoitemnfe AS SELECT
     nfadprod
 FROM app.fatoitemnfe;
 
--- privileges and permissions
---ALTER SCHEMA appmask OWNER TO datalakeuser;
---ALTER TABLE appmask.fatonfe OWNER TO datalakeuser;
---ALTER TABLE appmask.fatoitemnfe OWNER TO datalakeuser;
-
---GRANT USAGE ON SCHEMA appmask TO datalakeuser;
---GRANT ALL ON ALL TABLES IN SCHEMA appmask TO datalakeuser;
---GRANT ALL ON ALL SEQUENCES IN SCHEMA appmask TO datalakeuser;
---GRANT ALL ON ALL FUNCTIONS IN SCHEMA appmask TO datalakeuser;
-
 
 -- Hasura - see https://github.com/arialab/sefazpb-infra/tree/master/hasura
 
@@ -758,7 +743,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA information_schema TO hasurauser;
 GRANT SELECT ON ALL TABLES IN SCHEMA pg_catalog TO hasurauser;
 
 -- set search path to include schemas for a particular role
-ALTER ROLE hasurauser SET search_path TO public,app;
+ALTER ROLE hasurauser SET search_path TO public,app,appmask;
 
 -- change database and user
 \connect datalake datalakeuser
