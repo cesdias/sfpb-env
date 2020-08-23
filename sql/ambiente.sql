@@ -236,7 +236,7 @@ CREATE UNLOGGED TABLE app.fatoitemnfe(
 	infNFe_det_imposto_ICMS_ICMS00_pICMS numeric(16,2),
 	infNFe_det_imposto_ICMS_ICMS00_vICMS numeric(16,2)
 );
-CREATE UNIQUE INDEX fatoitemnfe_unique_index ON app.fatoitemnfe_test(infProt_chNFe, infNFe_det_nItem);
+CREATE UNIQUE INDEX fatoitemnfe_unique_index ON app.fatoitemnfe(infProt_chNFe, infNFe_det_nItem);
 
 -- change database and user
 \connect datalake postgres
@@ -774,7 +774,7 @@ create or replace function hasura_auth(email in varchar, cleartext_password in v
 $$ language 'sql' stable;
 
 -- initial user
-insert into hasura_user(email, cleartext_password, default_role, allowed_roles) values ('poc@serpb.local', '48jL1bzADd04', 'g_ufpb_datalake_anon', '["g_ufpb_datalake_all", "g_ufpb_datalake_admin", "g_ufpb_datalake_gecof1", "g_ufpb_datalake_anon"]');
+insert into hasura_user(email, cleartext_password, default_role, allowed_roles) values ('poc@serpb.local', '48jL1bzADd04', 'g_ufpb_datalake_gecof1', '["g_ufpb_datalake_all", "g_ufpb_datalake_admin", "g_ufpb_datalake_gecof1", "g_ufpb_datalake_anon"]');
 
 GRANT USAGE ON SCHEMA public TO hasurauser;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO hasurauser;
