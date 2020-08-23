@@ -20,8 +20,8 @@ fi
 echo -e ""
 echo -e "⚙️  SEFAZPB-DEV Environment Setup"
 echo -e ""
-echo -e "➡️  This build will take ~ 2 minutes in a 100Mbps connection"
-echo -e "➡️  and it will take ~ 1.5GB of disk space."
+echo -e "➡️  This build takes ~ 1 minutes on a 100Mbps connection"
+echo -e "➡️  and stores ~ 1.5GB of data on your disk."
 echo -e ""
 
 # building openssl image
@@ -92,7 +92,7 @@ RES=`curl -sSL -d '{"type":"replace_metadata","args":'$(cat hasura/hasura_metada
 echo -e $RES |grep success
 if [ "$?" -ne 0 ]; then
     echo -e ""
-    echo -e "${RED}Error restoring Hasura metadata. Check the X_HASURA_ADMIN_SECRET value and run $0 again.${NC} ❌"
+    echo -e "${RED}Error restoring Hasura metadata. Check your metadata file and/or the X_HASURA_ADMIN_SECRET value and run $0 again.${NC} ❌"
     exit 1
 else
     echo -e "${GREEN}Done!${NC} ✅"
@@ -106,7 +106,20 @@ echo -e "    🌐 hasura console: http://localhost:8080/console"
 echo -e "    🌐 hasura endpoint: http://localhost:8080/v1/graphql"
 echo -e "    🔑 x-hasura-admin-secret: $X_HASURA_ADMIN_SECRET"
 echo -e ""
-echo -e "For test Authentication and Authorization:"
+echo -e "For Authentication and Authorization:"
 echo -e "    👤 username: poc@serpb.local"
 echo -e "    🔑 password: 48jL1bzADd04"
+echo -e ""
+echo -e "PostgreSQL databases and credentials:"
+echo -e "    👤 username: postgres"
+echo -e "    🔑 password: Aiveid7n"
+echo -e "    🗄️  database: postgres"
+echo -e ""
+echo -e "    👤 username: datalakeuser"
+echo -e "    🔑 password: EQuohG2i"
+echo -e "    🗄️  database: datalake"
+echo -e ""
+echo -e "    👤 username: hasurauser"
+echo -e "    🔑 password: quaevu8U"
+echo -e "    🗄️  database: datalake"
 echo -e ""
