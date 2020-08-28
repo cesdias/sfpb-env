@@ -130,7 +130,7 @@ INSERT INTO app.label VALUES
   (96,'infProt_chNFe','character varying(44)','Chaves de acesso da NF-e, compostas por: UF do emitente, AAMM da emissão da NFe, CNPJ do emitente, modelo, série e número da NF-e e código numérico+DV',NULL,NULL,NULL,'fatonfe')
   ;
 
-CREATE UNLOGGED TABLE app.fatonfe(
+CREATE TABLE app.fatonfe(
   infProt_chNFe character varying(44) PRIMARY KEY,
 	infNFe_ide character varying(100),
 	infNFe_ide_cUF char(2),
@@ -209,7 +209,7 @@ CREATE UNLOGGED TABLE app.fatonfe(
 	infNFe_total_ICMSTot_vNF numeric(16,2)
 );
 
-CREATE UNLOGGED TABLE app.fatoitemnfe(
+CREATE TABLE app.fatoitemnfe(
 	id BIGSERIAL PRIMARY KEY,
 	infProt_chNFe character varying(44),
 	infNFe_det_nItem int,
