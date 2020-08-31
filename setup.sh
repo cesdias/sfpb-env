@@ -88,7 +88,7 @@ done
 
 # restoring hasura metadata
 echo -e "⚙️  Restoring hasura metadata..."
-RES=`curl -sSL -d '{"type":"replace_metadata","args":'$(cat hasura/hasura_metadata-2020_08_23-without_appmask.json)'}' -H "X-Hasura-Admin-Secret: $X_HASURA_ADMIN_SECRET" http://localhost:8080/v1/query`
+RES=`curl -sSL -d '{"type":"replace_metadata","args":'$(cat hasura/hasura_metadata-2020_08_31-without-appmask_with-uepb.json)'}' -H "X-Hasura-Admin-Secret: $X_HASURA_ADMIN_SECRET" http://localhost:8080/v1/query`
 echo -e $RES |grep success
 if [ "$?" -ne 0 ]; then
     echo -e ""
@@ -109,6 +109,9 @@ echo -e ""
 echo -e "For Authentication and Authorization:"
 echo -e "    👤 username: poc@serpb.local"
 echo -e "    🔑 password: 48jL1bzADd04"
+echo -e ""
+echo -e "    👤 username: uepb@serpb.local"
+echo -e "    🔑 password: Pz7eMzrNXjzw"
 echo -e ""
 echo -e "PostgreSQL databases and credentials:"
 echo -e "    👤 username: postgres"
