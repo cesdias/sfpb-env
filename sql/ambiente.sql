@@ -164,7 +164,7 @@ CREATE TABLE app.fatonfe(
 	infNFe_emit_enderEmit_cMun character varying,
 	infNFe_emit_enderEmit_xMun character varying,
 	infNFe_emit_enderEmit_UF character varying,
-	infNFe_emit_enderEmitr_CEP character varying,
+	infNFe_emit_enderEmit_CEP character varying,
 	infNFe_emit_enderEmit_cPais character varying,
 	infNFe_emit_enderEmit_xPais character varying,
 	infNFe_emit_enderEmit_fone character varying,
