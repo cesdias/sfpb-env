@@ -131,7 +131,7 @@ INSERT INTO app.label VALUES
   ;
 
 CREATE TABLE app.fatonfe(
-	infProt_chNFe character varying PRIMARY KEY,
+	infProt_chNFe character varying(44) PRIMARY KEY,
 	infNFe_ide_cUF integer,
 	infNFe_ide_cNF character varying,
 	infNFe_ide_natOp character varying,
