@@ -138,7 +138,7 @@ CREATE TABLE app.fatonfe(
 	infNFe_ide_mod integer,
 	infNFe_ide_serie character varying,
 	infNFe_ide_nNF character varying,
-	infNFe_ide_dhEmi timestamp without time zone,
+	infNFe_ide_dhEmi timestamp with time zone,
   infNFe_ide_dhSaiEnt timestamp with time zone,
 	infNFe_ide_tpNF integer,
 	infNFe_ide_idDest integer,
@@ -210,6 +210,7 @@ CREATE TABLE app.fatonfe(
 
 CREATE TABLE app.fatoitemnfe(
 	id BIGSERIAL PRIMARY KEY,
+  infProt_chNFe character varying(44),
 	infNFe_det_nItem character varying,
 	infNFe_det_prod_cProd character varying,
 	infNFe_det_prod_cEAN character varying,
