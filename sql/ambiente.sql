@@ -139,6 +139,7 @@ CREATE TABLE app.fatonfe(
 	infNFe_ide_serie character varying,
 	infNFe_ide_nNF character varying,
 	infNFe_ide_dhEmi timestamp without time zone,
+  infNFe_ide_dhSaiEnt timestamp with time zone,
 	infNFe_ide_tpNF integer,
 	infNFe_ide_idDest integer,
 	infNFe_ide_cMunFG character varying,
