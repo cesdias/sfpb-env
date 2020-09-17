@@ -240,6 +240,31 @@ CREATE TABLE app.fatoitemnfe(
 );
 CREATE UNIQUE INDEX fatoitemnfe_unique_index ON app.fatoitemnfe(infProt_chNFe, infNFe_det_nItem);
 
+
+-- EFD create_tables.sql - see https://github.com/arialab/sefazpb-infra/tree/master/postgres/datalake/EFD/loader
+
+--Create Master table
+CREATE TABLE IF NOT EXISTS app.efd
+(
+    id serial PRIMARY KEY,
+    protocolo varchar(50),
+    origem char(12),
+    cnpj character(14),
+    insestadual character(9),
+    retificacao boolean,
+    periodo character(6),
+    dtprotocolo timestamp,
+    layout character varying(3),
+    dtentrega timestamp,
+    arquivo bytea,
+    efd jsonb
+);
+
+--Create index
+CREATE INDEX idx_EFD_cnpj ON app.efd (cnpj, periodo);
+CREATE INDEX idx_EFD_insestadual ON app.efd (insestadual, periodo);
+
+
 -- change database and user
 \connect datalake postgres
 
@@ -269,7 +294,7 @@ GRANT ALL ON ALL SEQUENCES IN SCHEMA anon TO datalakeuser;
 GRANT ALL ON ALL FUNCTIONS IN SCHEMA anon TO datalakeuser;
 
 -- change database and user
-\connect datalake datalakeuser
+--\connect datalake datalakeuser
 
 -- TODO: recreate all MATERIALIZED VIEWS according to new tables
 -- creating anon mviews
@@ -783,29 +808,3 @@ GRANT USAGE ON SCHEMA public TO hasurauser;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO hasurauser;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO hasurauser;
 GRANT ALL ON ALL FUNCTIONS IN SCHEMA public TO hasurauser;
-
-
--- EFD create_tables.sql - see https://github.com/arialab/sefazpb-infra/tree/master/postgres/datalake/EFD/loader
-\connect datalake datalakeuser
-
---Create Master table
-CREATE TABLE IF NOT EXISTS app.efd
-(
-    id serial PRIMARY KEY,
-    protocolo varchar(50),
-    origem char(12),
-    cnpj character(14),
-    insestadual character(9),
-    retificacao boolean,
-    periodo character(6),
-    dtprotocolo timestamp,
-    layout character varying(3),
-    dtentrega timestamp,
-    arquivo bytea,
-    efd jsonb
-);
-
---Crete index
-CREATE INDEX idx_EFD_cnpj ON app.efd (cnpj, periodo);
-CREATE INDEX idx_EFD_insestadual ON app.efd (insestadual, periodo);
-			       
