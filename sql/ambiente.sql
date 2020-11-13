@@ -33,7 +33,7 @@ CREATE TABLE app.label (
 
 INSERT INTO app.label VALUES
   (0, 'infnfe_ide_cuf', 'integer', 'Código da UF do emitente do Documento Fiscal', 'não', 'Utilizar a Tabela do IBGE ', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe'),
-  (1, 'infnfe_ide_cnf', 'character varying', 'Código numérico que compõe a Chave de Acesso', 'sim', 'Número aleatório gerado pelo emitente para cada NF-e', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe'),
+  (1, 'infnfe_ide_cnf', 'character varying', 'Código numérico para evitar acesso indevido ', 'sim', 'Número aleatório que compõe o código numérico gerado pelo emitente para cada NF-e', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe'),
   (2, 'infnfe_ide_natop', 'character varying', 'Descrição da Natureza da Operação', 'não', 'nan', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe'),
   (3, 'infnfe_ide_mod', 'integer', 'Código do modelo do Documento Fiscal', 'não', '55 - NF-e; 65 - NFC-e', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe'),
   (4, 'infnfe_ide_serie', 'character varying', 'Série do Documento Fiscal ', 'sim', 'Série normal - 0-889; Avulsa Fisco - 890-899; SCAN - 900-999', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe'),
