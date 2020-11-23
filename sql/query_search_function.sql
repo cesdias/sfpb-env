@@ -1,6 +1,13 @@
 --Create FTS search
+
+-- change database and user
+\connect datalake postgres
+
 --Chama pacote para o índice do dicionário
 CREATE EXTENSION pg_trgm;
+
+-- change database and user
+\connect datalake datalakeuser
 
 --Cria tabela dicionário
 CREATE TABLE app.words AS SELECT word FROM
