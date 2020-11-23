@@ -136,6 +136,8 @@ INSERT INTO app.label VALUES
   (100, 'informix_nriptransmissor ', 'character varying', 'IP da conexão de envio da Nota Fiscal Eletrônica', 'sim', 'nan', 'Informações do Informix', 'fatonfe'),
   (101, 'informix_nrportacon', 'integer', 'Porta da conexão de envio da Nota Fiscal Eletrônica', 'não', 'nan', 'Informações do Informix', 'fatonfe')
 ;
+
+
 CREATE TABLE app.fatonfe(
 	infProt_chNFe character varying(44) PRIMARY KEY,
  	infNFe_ide character varying,
@@ -267,6 +269,7 @@ CREATE TABLE IF NOT EXISTS app.efd
 --Create index
 CREATE INDEX idx_EFD_cnpj ON app.efd (cnpj, periodo);
 CREATE INDEX idx_EFD_insestadual ON app.efd (insestadual, periodo);
+
 
 
 -- change database and user
