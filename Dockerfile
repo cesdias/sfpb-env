@@ -1,5 +1,6 @@
 FROM cesdias/postgres13-anon:1.0
 COPY ./sql/ambiente.sql /docker-entrypoint-initdb.d
+COPY ./sql/query_search_function.sql /docker-entrypoint-initdb.d
 COPY ./sql/refresh_materialized_views.sql /docker-entrypoint-initdb.d
 COPY ./data/app_efd-2020_09_17.sql /docker-entrypoint-initdb.d
 COPY ./data/app_fatonfe-2020_09_17.sql /docker-entrypoint-initdb.d
