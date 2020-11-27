@@ -53,7 +53,7 @@ INSERT INTO app.label VALUES
   (18, 'infnfe_ide_procemi', 'integer', 'Processo de emissão utilizado com a seguinte codificação', 'não', '0 - Emissão de NF-e com aplicativo do contribuinte; 1 - Emissão de NF-e avulsa pelo Fisco; 2 - Emissão de NF-e avulsa, pelo contribuinte com seu certificado digital, através do sitedo Fisco; 3 - 
  Emissão de NF-e pelo contribuinte com aplicativo fornecido pelo Fisco.', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe'),
   (19, 'infnfe_ide_verproc', 'character varying', 'Versão do aplicativo utilizado no processo de emissão', 'não', 'nan', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe'),
-  (20, 'infnfe_emit_cnpj', 'character varying', 'Número do CNPJ do emitente', 'sim', 'nan', 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
+  (20, 'infnfe_emit_cnpj', 'char(14)', 'Número do CNPJ do emitente', 'sim', 'nan', 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
   (21, 'infnfe_emit_cpf', 'character varying', 'Número do CPF do emitente', 'sim', 'nan', 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
   (22, 'infnfe_emit_xnome', 'character varying', 'Razão Social ou Nome do emitente', 'sim', 'nan', 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
   (23, 'infnfe_emit_xfant', 'character varying', 'Nome fantasia do emitente', 'sim', 'nan', 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
@@ -73,7 +73,7 @@ INSERT INTO app.label VALUES
   (37, 'infnfe_emit_im', 'character varying', 'Inscrição Municipal do emitente', 'sim', 'nan', 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
   (38, 'infnfe_emit_cnae', 'character varying', 'CNAE Fiscal do emitente', 'sim', 'nan', 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
   (39, 'infnfe_emit_crt', 'character varying', 'Código de Regime Tributário do emitente', 'não', 'Este campo será obrigatoriamente preenchido com: 1 – Simples Nacional; 2 – Simples Nacional – excesso de sublimite de receita bruta; 3 – Regime Normal.', 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
-  (40, 'infnfe_dest_cnpj', 'character varying', 'Número do CNPJ do destinatário', 'sim', 'nan', 'Grupo E. Identificação do Destinatário da Nota Fiscal eletrônica', 'fatonfe'),
+  (40, 'infnfe_dest_cnpj', 'char(14)', 'Número do CNPJ do destinatário', 'sim', 'nan', 'Grupo E. Identificação do Destinatário da Nota Fiscal eletrônica', 'fatonfe'),
   (41, 'infnfe_dest_cpf', 'character varying', 'Número do CPF do destinatário', 'sim', 'nan', 'Grupo E. Identificação do Destinatário da Nota Fiscal eletrônica', 'fatonfe'),
   (42, 'infnfe_dest_idestrangeiro', 'character varying', 'Identificador do destinatário, em caso de comprador estrangeiro', 'sim', 'nan', 'Grupo E. Identificação do Destinatário da Nota Fiscal eletrônica', 'fatonfe'),
   (43, 'infnfe_dest_xnome', 'character varying', 'Razão Social ou nome do destinatário', 'sim', 'nan', 'Grupo E. Identificação do Destinatário da Nota Fiscal eletrônica', 'fatonfe'),
