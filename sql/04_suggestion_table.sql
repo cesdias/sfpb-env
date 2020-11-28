@@ -1,3 +1,6 @@
+-- change database and user
+\connect datalake datalakeuser
+
 -- Cria tabela de sugestão
 CREATE TABLE app.suggestion AS SELECT DISTINCT infnfe_det_prod_xprod, infnfe_det_prod_cean
 FROM app.fatoitemnfe
