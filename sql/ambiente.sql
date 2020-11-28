@@ -214,8 +214,19 @@ CREATE TABLE app.fatonfe(
 	infNFe_total_ICMSTot_vPIS numeric(16,2),
 	infNFe_total_ICMSTot_vCOFINS numeric(16,2),
 	infNFe_total_ICMSTot_vOutro numeric(16,2),
-	infNFe_total_ICMSTot_vNF numeric(16,2)
+	infNFe_total_ICMSTot_vNF numeric(16,2),
+	informix_stnfeletronica char(1) NOT NULL DEFAULT 'A',
+	informix_dhconexao varchar NULL,
+	informix_nriptransmissor varchar NULL,
+	informix_nrportacon int4 NULL
 );
+
+CREATE INDEX fatonfe_infprot_chnfe_idx ON app.fatonfe USING btree (infprot_chnfe);
+CREATE INDEX idx_infnfe_ide_dhemi ON app.fatonfe USING btree (infnfe_ide_dhemi);
+CREATE INDEX fatonfe_infnfe_ide_mod_idx ON app.fatonfe USING btree (infnfe_ide_mod);
+CREATE INDEX fatonfe_infnfe_emit_cnpj_idx ON app.fatonfe USING btree (infnfe_emit_cnpj);
+CREATE INDEX fatonfe_infnfe_emit_ie_idx ON app.fatonfe USING btree (infnfe_emit_ie);
+CREATE INDEX idx_infnfe_dest_cnpj ON app.fatonfe USING btree (infnfe_dest_cnpj);
 
 CREATE TABLE app.fatoitemnfe(
 	id BIGSERIAL PRIMARY KEY,
@@ -245,6 +256,8 @@ CREATE TABLE app.fatoitemnfe(
 	infNFe_det_imposto_ICMS_ICMS00_vICMS numeric(16,2)
 );
 CREATE UNIQUE INDEX fatoitemnfe_unique_index ON app.fatoitemnfe(infProt_chNFe, infNFe_det_nItem);
+CREATE INDEX fatoitemnfe_infprot_chnfe_idx ON app.fatoitemnfe USING btree (infprot_chnfe);
+
 
 
 -- EFD create_tables.sql - see https://github.com/arialab/sefazpb-infra/tree/master/postgres/datalake/EFD/loader
