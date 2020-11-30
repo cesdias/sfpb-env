@@ -2,10 +2,12 @@
 \connect datalake datalakeuser
 
 -- Cria nova tabela que permite que o usuário salve queries customizadas
-CREATE TABLE app.custom_queries(
+CREATE TABLE app.async_downloads(
     id SERIAL PRIMARY KEY,
-    user_id varchar,
+    user_id text,
     custom_query JSON,
-    query_date timestamp,
-    query_order int
+    start_datetime timestamp,
+	close_datetime timestamp,
+	status boolean,
+    download_link varchar
 );
