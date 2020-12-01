@@ -34,6 +34,19 @@ CREATE FUNCTION  app.query_fts(word_search varchar) RETURNS SETOF app.search AS 
     ORDER BY count desc;
 $$  LANGUAGE sql STABLE;
 
+
+
+-- Busca de Trigrama
+CREATE INDEX xprod_idx ON app.fatoitemnfe USING GIN (infnfe_det_prod_xprod gin_trgm_ops);
+
+CREATE FUNCTION  app.query_trgm(word_search varchar) RETURNS SETOF app.search AS $$
+	SELECT infnfe_det_prod_xprod, COUNT(*)
+	FROM app.fatoitemnfe
+	WHERE word_search <% infnfe_det_prod_xprod
+	GROUP BY infnfe_det_prod_xprod
+	ORDER BY count desc;
+$$  LANGUAGE sql STABLE;
+
 --Concede permissões de acesso
 -- app
 GRANT USAGE ON SCHEMA app TO hasurauser;
