@@ -11,5 +11,6 @@ CREATE TABLE app.async_downloads(
     start_datetime timestamp,
 	close_datetime timestamp,
 	status boolean,
+    stats JSON,
     download_link varchar
 );
