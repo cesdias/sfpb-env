@@ -10,6 +10,7 @@ CREATE TABLE app.async_downloads(
     custom_query JSON,
     start_datetime timestamp,
 	close_datetime timestamp,
+    send_datetime timestamp,
 	status boolean,
     stats JSON,
     download_link varchar
