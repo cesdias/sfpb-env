@@ -395,7 +395,11 @@ CREATE MATERIALIZED VIEW appmask.fatonfe AS SELECT
     infNFe_total_ICMSTot_vCOFINS,
     infNFe_total_ICMSTot_vOutro,
     infNFe_total_ICMSTot_vNF,
-    encode(digest(infProt_chNFe, 'sha256'), 'hex') AS infProt_chNFe
+    encode(digest(infProt_chNFe, 'sha256'), 'hex') AS infProt_chNFe,
+    informix_stnfeletronica,
+	informix_dhconexao,
+	informix_nriptransmissor,
+	informix_nrportacon
 FROM app.fatonfe;
 
 
