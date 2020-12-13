@@ -88,7 +88,7 @@ done
 
 # restoring hasura metadata
 echo -e "⚙️  Restoring hasura metadata..."
-RES=`curl -sSL -d '{"type":"replace_metadata","args":'$(cat hasura/hasura_metadata-2020_12_09.json)'}' -H "X-Hasura-Admin-Secret: $X_HASURA_ADMIN_SECRET" http://localhost:8080/v1/query`
+RES=`curl -sSL -d '{"type":"replace_metadata","args":'$(cat hasura/hasura_metadata-2020_12_13.json)'}' -H "X-Hasura-Admin-Secret: $X_HASURA_ADMIN_SECRET" http://localhost:8080/v1/query`
 echo -e $RES |grep success
 if [ "$?" -ne 0 ]; then
     echo -e ""
