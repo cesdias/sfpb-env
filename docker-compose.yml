@@ -26,6 +26,7 @@ services:
       - "pgdata:/var/lib/postgresql/data"
     environment:
       POSTGRES_PASSWORD: "Aiveid7n"
+      TZ: "America/Recife"
 
 volumes:
   pgdata:
