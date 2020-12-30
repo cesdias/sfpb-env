@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
   graphql-engine:
     image: "hasura/graphql-engine:v1.3.2"
@@ -19,11 +19,12 @@ services:
     restart: "on-failure"
 
   datalake:
-    build: .
+    image: "cesdias/postgres13-anon:1.1"
     ports:
       - "5432:5432"
     volumes:
       - "pgdata:/var/lib/postgresql/data"
+      - "./sql:/docker-entrypoint-initdb.d"
     environment:
       POSTGRES_PASSWORD: "Aiveid7n"
       TZ: "America/Recife"

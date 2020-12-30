@@ -1,4 +1,5 @@
-FROM cesdias/postgres13-anon:1.0
+FROM cesdias/postgres13-anon:1.1
+COPY ./sql/00_config.sql /docker-entrypoint-initdb.d
 COPY ./sql/01_ambiente.sql /docker-entrypoint-initdb.d
 COPY ./sql/02_custom_queries_table.sql /docker-entrypoint-initdb.d
 COPY ./sql/03_query_search_function.sql /docker-entrypoint-initdb.d
