@@ -612,6 +612,7 @@ $$ language 'sql' stable;
 -- initial user
 insert into hasura_user(email, cleartext_password, default_role, allowed_roles) values ('poc@serpb.local', '48jL1bzADd04', 'g_ufpb_datalake_gecof1', '["g_ufpb_datalake_all", "g_ufpb_datalake_admin", "g_ufpb_datalake_gecof1", "g_ufpb_datalake_anon"]');
 insert into hasura_user(email, cleartext_password, default_role, allowed_roles) values ('uepb@serpb.local', 'Pz7eMzrNXjzw', 'g_uepb_datalake_app1', '["g_uepb_datalake_app1"]');
+insert into hasura_user(email, cleartext_password, default_role, allowed_roles) values ('cicc@serpb.local', 'wPiBssDzhYTm', 'g_ufpb_datalake_cicc', '["g_ufpb_datalake_cicc"]');
 
 GRANT USAGE ON SCHEMA public TO hasurauser;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO hasurauser;
