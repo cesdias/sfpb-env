@@ -441,6 +441,9 @@ CREATE USER hasurauser WITH PASSWORD 'quaevu8U';
 -- grant connection to 'hasurauser' on database 'datalake'
 GRANT CONNECT ON DATABASE datalake TO hasurauser;
 
+-- create pg_repack extension
+CREATE EXTENSION pg_repack;
+
 -- create pgcrypto extension, required for UUID
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
