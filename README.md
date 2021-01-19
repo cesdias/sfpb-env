@@ -55,6 +55,26 @@ Usage: ./setup.sh <secret-key>
 
 Aguarde a preparação do ambiente e as instruções apresentadas ao final da execução do script `setup.sh`.
 
+
+## Cargas das amostras de dados
+
+1) EFD (utilize as senhas apresentadas no final da execução do script para o usuário postgres e datalakeuser)
+```console
+foo@bar# psql -h localhost -U postgres -W -f data/app_efd-2020_09_17.sql
+```
+2) FatoNFE  (utilize as senhas apresentadas no final da execução do script para o usuário postgres e datalakeuser)
+```console
+foo@bar# psql -h localhost -U postgres -W -f data/app_fatonfe-2020_09_17.sql
+```
+3) FatoItemNFE  (utilize as senhas apresentadas no final da execução do script para o usuário postgres e datalakeuser)
+```console
+foo@bar# psql -h localhost -U postgres -W -f app_fatoitemnfe-2020_09_17.sql
+```
+
+
+
+
+
 ## Vídeo da Execução do Script de Preparação do Ambiente de Desenvolvimento
 
 [![asciicast](https://asciinema.org/a/P2tRAtVAKe3m64kbMz3TVR2Qp.svg)](https://asciinema.org/a/P2tRAtVAKe3m64kbMz3TVR2Qp)
