@@ -34,6 +34,36 @@ else
     echo -e "${GREEN}Done!${NC} ✅"
 fi
 
+# downloading data.enc
+echo -e ""
+echo -n "⚙️  Downloading data.enc..."
+if [ ! -f data.enc ]; then
+    echo -e ""
+    curl -SL https://hacks.pro.br/data.enc -o data.enc
+else
+    echo -e " file exists. Skipping download."
+fi
+if [ "$?" -ne 0 ]; then
+    echo -e "${RED}Error downloading. Run $0 again.${NC} ❌"
+    exit 1
+else
+    echo -e "${GREEN}Done!${NC} ✅"
+fi
+
+# checksum data.enc
+echo -e ""
+echo -e "⚙️  Verifying data.enc..."
+curl -sSL https://hacks.pro.br/data.sha -o data.sha
+shasum data.enc | cmp -s data.sha -
+if [ "$?" -ne 0 ]; then
+    echo -e "${RED}Checksum error. Remove 'data.enc' and run $0 again.${NC} ❌"
+    rm data.sha
+    exit 1
+else
+    echo -e "${GREEN}Done!${NC} ✅"
+    rm data.sha
+fi
+
 # decrypting data.zip
 echo -e ""
 echo -e "⚙️  Decrypting data.zip..."
