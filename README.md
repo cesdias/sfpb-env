@@ -106,7 +106,7 @@ Caso o `git lfs` esteja corretamente instalado, tente baixar manualmente o arqui
 ```console
 foo@bar# cd sefazpb-ambiente
 foo@bar# git lfs pull data.enc
-Username for 'https://github.com': <USUARIO>                                                                                                                                                             
+Username for 'https://github.com': <USUARIO>
 Password for 'https://cesdias@github.com': <SENHA>
 Downloading LFS objects: 100% (1/1), 102 MB | 19 MB/s
 ```
