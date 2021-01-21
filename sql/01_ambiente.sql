@@ -10,7 +10,7 @@ CREATE DATABASE datalake;
 REVOKE ALL ON DATABASE datalake FROM public;
 ALTER DATABASE datalake OWNER TO datalakeuser;
 GRANT CONNECT ON DATABASE datalake to datalakeuser;
-ALTER ROLE datalakeuser SET search_path TO public,app,appmask;
+ALTER ROLE datalakeuser SET search_path TO public,app,appmask,cicc;
 
 -- change database and user
 \connect datalake datalakeuser
@@ -18,6 +18,7 @@ ALTER ROLE datalakeuser SET search_path TO public,app,appmask;
 -- schemas
 CREATE SCHEMA app;
 CREATE SCHEMA appmask;
+CREATE SCHEMA cicc;
 
 -- tables
 CREATE TABLE app.label (
@@ -461,7 +462,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA information_schema TO hasurauser;
 GRANT SELECT ON ALL TABLES IN SCHEMA pg_catalog TO hasurauser;
 
 -- set search path to include schemas for a particular role
-ALTER ROLE hasurauser SET search_path TO public,app,appmask;
+ALTER ROLE hasurauser SET search_path TO public,app,appmask,cicc;
 
 -- change database and user
 \connect datalake datalakeuser
@@ -481,6 +482,12 @@ GRANT USAGE ON SCHEMA appmask TO hasurauser;
 GRANT ALL ON ALL TABLES IN SCHEMA appmask TO hasurauser;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA appmask TO hasurauser;
 GRANT ALL ON ALL FUNCTIONS IN SCHEMA appmask TO hasurauser;
+
+-- cicc
+GRANT USAGE ON SCHEMA cicc TO hasurauser;
+GRANT ALL ON ALL TABLES IN SCHEMA cicc TO hasurauser;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA cicc TO hasurauser;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA cicc TO hasurauser;
 
 
 -- Hasura JWT Auth - see https://github.com/arialab/sefazpb-infra/tree/master/hasura/hasura_jwt_auth
