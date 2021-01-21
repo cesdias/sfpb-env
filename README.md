@@ -138,6 +138,86 @@ Usage: ./setup.sh <secret-key>
 
 Aguarde a preparação do ambiente e leia as instruções apresentadas ao final da execução do script `setup.sh` para utilizar o ambiente. Em caso de dúvida na execução do `setup.sh`, veja o vídeo no final deste documento.
 
+## Operando o ambiente
+
+O ambiente é criado utilizando o `docker-compose`, podendo ser parado e reiniciado várias vezes, além de outras verificações, como os logs do banco de dados, do hasura, entre outros. Em algumas situações também será necessário destruir o ambiente e reinicia-lo pelo `setup.sh`.
+
+Execute os comandos abaixo sempre dentro do diretório `sefazpb-ambiente`.
+
+### Verificando o ambiente em execução
+
+```console
+foo@bar# docker-compose ps
+--------------------------------------------------------------------------------------------------
+sefazpb-ambiente_datalake_1         docker-entrypoint.sh postgres   Up      0.0.0.0:5432->5432/tcp
+sefazpb-ambiente_graphql-engine_1   graphql-engine serve            Up      0.0.0.0:8080->8080/tcp
+```
+
+Obs.: O Hasura roda na porta 8080 e pode ser acessado via navegador. O PostgreSQL executa na porta 5432 e pode ser acessado pelo PgAdmin.
+
+### Parando o ambiente
+
+```console
+foo@bar# docker-compose down
+Stopping sefazpb-ambiente_graphql-engine_1 ... done
+Stopping sefazpb-ambiente_datalake_1       ... done
+Removing sefazpb-ambiente_graphql-engine_1 ... done
+Removing sefazpb-ambiente_datalake_1       ... done
+Removing network sefazpb-ambiente_default
+```
+
+### Iniciando o ambiente
+
+```console
+foo@bar# docker-compose up -d
+Creating network "sefazpb-ambiente_default" with the default driver
+Creating sefazpb-ambiente_datalake_1 ... done
+Creating sefazpb-ambiente_graphql-engine_1 ... done
+```
+
+### Logs dos containers do ambiente
+
+#### PostgreSQL
+
+```console
+foo@bar# docker-compose logs datalake
+Attaching to sefazpb-ambiente_datalake_1
+datalake_1        | 
+datalake_1        | PostgreSQL Database directory appears to contain a database; Skipping initialization
+datalake_1        | 
+datalake_1        | 2021-01-21 13:34:25.490 -03 [1] LOG:  starting PostgreSQL 13.1 (Debian 13.1-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+datalake_1        | 2021-01-21 13:34:25.490 -03 [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+datalake_1        | 2021-01-21 13:34:25.490 -03 [1] LOG:  listening on IPv6 address "::", port 5432
+datalake_1        | 2021-01-21 13:34:25.493 -03 [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+datalake_1        | 2021-01-21 13:34:25.497 -03 [27] LOG:  database system was shut down at 2021-01-21 13:34:20 -03
+datalake_1        | 2021-01-21 13:34:25.503 -03 [1] LOG:  database system is ready to accept connections
+```
+
+#### Hasura
+
+```console
+foo@bar# docker-compose logs graphql-engine
+Attaching to sefazpb-ambiente_graphql-engine_1
+graphql-engine_1  | {"type":"startup","timestamp":"2021-01-21T16:34:26.117+0000","level":"info","detail":{"kind":"server_configuration","info":{"live_query_options":{"batch_size":100,"refetch_delay":1},"transaction_isolation":"ISOLATION LEVEL READ COMMITTED","plan_cache_options":{"plan_cache_size":4000},"enabled_log_types":["http-log","websocket-log","startup","webhook-log","query-log"],"server_host":"HostAny","enable_allowlist":false,"log_level":"info","auth_hook_mode":null,"use_prepared_statements":true,"unauth_role":"anonymous","stringify_numeric_types":false,"enabled_apis":["metadata","graphql"],"enable_telemetry":false,"enable_console":true,"auth_hook":null,"jwt_secret":{"audience":null,"claims_format":null,"claims_namespace":"https://hasura.io/jwt/claims","key":"<JWK REDACTED>","type":"<TYPE REDACTED>","issuer":null},"cors_config":{"allowed_origins":"*","disabled":false,"ws_read_cookie":null},"console_assets_dir":"/srv/console-assets","admin_secret_set":true,"port":8080}}}
+graphql-engine_1  | {"type":"startup","timestamp":"2021-01-21T16:34:26.117+0000","level":"info","detail":{"kind":"postgres_connection","info":{"retries":1,"database_url":"postgres://hasurauser:...@datalake:5432/datalake"}}}
+graphql-engine_1  | {"type":"startup","timestamp":"2021-01-21T16:34:26.117+0000","level":"info","detail":{"kind":"catalog_migrate","info":"Already at the latest catalog version (37); nothing to do."}}
+graphql-engine_1  | {"type":"startup","timestamp":"2021-01-21T16:34:26.117+0000","level":"info","detail":{"kind":"schema-sync","info":{"thread_id":"ThreadId 23","instance_id":"126bac26-6c7b-4b50-868a-6cf75297ccb5","message":"listener thread started"}}}
+graphql-engine_1  | {"type":"startup","timestamp":"2021-01-21T16:34:26.117+0000","level":"info","detail":{"kind":"schema-sync","info":{"thread_id":"ThreadId 24","instance_id":"126bac26-6c7b-4b50-868a-6cf75297ccb5","message":"processor thread started"}}}
+graphql-engine_1  | {"type":"startup","timestamp":"2021-01-21T16:34:26.117+0000","level":"info","detail":{"kind":"event_triggers","info":"preparing data"}}
+graphql-engine_1  | {"type":"startup","timestamp":"2021-01-21T16:34:26.117+0000","level":"info","detail":{"kind":"event_triggers","info":"starting workers"}}
+graphql-engine_1  | {"type":"startup","timestamp":"2021-01-21T16:34:26.117+0000","level":"info","detail":{"kind":"scheduled_triggers","info":"preparing data"}}
+graphql-engine_1  | {"type":"startup","timestamp":"2021-01-21T16:34:26.117+0000","level":"info","detail":{"kind":"server","info":{"time_taken":0.496506453,"message":"starting API server"}}}
+```
+
+### Destruindo o ambiente
+
+:warning: A partir da destruição do ambiente, nenhum dos comandos acima irá funcionar, sendo necessário recriar o ambiente a partir do `setup.sh`.
+
+```console
+foo@bar# docker-compose down
+docker volume rm sefazpb-ambiente_pgdata
+```
+
 ## Cargas das amostras de dados
 
 1) EFD (utilize as senhas apresentadas no final da execução do script para o usuário postgres e datalakeuser)
@@ -152,10 +232,6 @@ foo@bar# psql -h localhost -U postgres -W -f data/app_fatonfe-2020_09_17.sql
 ```console
 foo@bar# psql -h localhost -U postgres -W -f app_fatoitemnfe-2020_09_17.sql
 ```
-
-
-
-
 
 ## Vídeo da Execução do Script de Preparação do Ambiente de Desenvolvimento
 
