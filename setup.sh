@@ -26,7 +26,7 @@ echo -e ""
 
 # building openssl image
 echo -e "⚙️  Building OpenSSL Docker Image..."
-docker build -t openssl ./openssl > /dev/null 2>&1
+docker build -t openssl ./openssl
 if [ "$?" -ne 0 ]; then
     echo -e "${RED}Error building image. Run $0 again.${NC} ❌"
     exit 1
@@ -67,7 +67,7 @@ fi
 # decrypting data.zip
 echo -e ""
 echo -e "⚙️  Decrypting data.zip..."
-docker run -it --rm -v $PWD:$PWD -w $PWD openssl openssl enc -d -aes-256-cbc -pbkdf2 -k $SECRET_KEY -in data.enc -out data.zip > /dev/null 2>&1
+docker run -it --rm -v $PWD:$PWD -w $PWD openssl openssl enc -d -aes-256-cbc -pbkdf2 -k $SECRET_KEY -in data.enc -out data.zip
 if [ "$?" -ne 0 ]; then
     echo -e "${RED}Error decrypting. Check the <secret-key> value and run $0 again.${NC} ❌"
     exit 1
@@ -118,7 +118,7 @@ done
 
 # restoring hasura metadata
 echo -e "⚙️  Restoring hasura metadata..."
-RES=`curl -sSL -d '{"type":"replace_metadata","args":'$(cat hasura/hasura_metadata-2020_12_17.json)'}' -H "X-Hasura-Admin-Secret: $X_HASURA_ADMIN_SECRET" http://localhost:8080/v1/query`
+RES=`curl -sSL -d '{"type":"replace_metadata","args":'$(cat hasura/hasura_metadata-2021_01_26.json)'}' -H "X-Hasura-Admin-Secret: $X_HASURA_ADMIN_SECRET" http://localhost:8080/v1/query`
 echo -e $RES |grep success
 if [ "$?" -ne 0 ]; then
     echo -e ""
