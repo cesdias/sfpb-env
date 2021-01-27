@@ -39,6 +39,22 @@ CREATE FUNCTION  app.query_trgm(word_search varchar) RETURNS SETOF app.search AS
 	ORDER BY count desc;
 $$  LANGUAGE sql STABLE;
 
+
+
+CREATE VIEW app.capa_item_view AS
+SELECT *
+FROM app.fatoitemnfe INNER JOIN app.fatonfe using(infprot_chnfe);
+
+--Cria função para busca fts (campos do item e capa da nota)
+CREATE FUNCTION app.query_fts_capa(search text)
+RETURNS SETOF app.capa_item_view AS $$
+    SELECT *
+    FROM app.fatoitemnfe INNER JOIN app.fatonfe using(infprot_chnfe)
+    WHERE
+      infnfe_det_prod_xprod @@ to_tsquery(search);
+
+$$ LANGUAGE sql STABLE;
+
 --Concede permissões de acesso
 -- app
 GRANT USAGE ON SCHEMA app TO hasurauser;
