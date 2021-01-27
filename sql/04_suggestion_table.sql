@@ -1,4 +1,4 @@
-/*-- change database and user
+-- change database and user
 \connect datalake datalakeuser
 
 -- Cria tabela de sugestão
@@ -11,9 +11,9 @@ HAVING COUNT(*) >= 50;
 CREATE INDEX xprod_suggest_idx ON app.suggestion USING GIN (infnfe_det_prod_xprod gin_trgm_ops);
 
 CREATE FUNCTION  app.query_suggestion_trgm(word_search varchar) RETURNS SETOF app.search AS $$
-	SELECT infnfe_det_prod_xprod
+	SELECT infnfe_det_prod_xprod, COUNT(*)
 	FROM app.suggestion
 	WHERE word_search <% infnfe_det_prod_xprod
 	GROUP BY infnfe_det_prod_xprod
 	ORDER BY count desc;
-$$  LANGUAGE sql STABLE;*/
+$$  LANGUAGE sql STABLE;
