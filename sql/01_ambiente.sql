@@ -223,6 +223,7 @@ CREATE TABLE app.fatonfe(
 	infNFe_total_ICMSTot_vCOFINS numeric(16,2),
 	infNFe_total_ICMSTot_vOutro numeric(16,2),
 	infNFe_total_ICMSTot_vNF numeric(16,2),
+	infNFe_total_ICMSTot_vTotTrib numeric(16,2),
    	infNFe_cobr_fat_nFat character varying(60),
    	infNFe_cobr_fat_vOrig numeric(16,2),
    	infNFe_cobr_fat_vDesc numeric(16,2),
