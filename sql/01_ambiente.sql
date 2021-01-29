@@ -246,7 +246,6 @@ CREATE TABLE app.fatonfe(
 	informix_nrportacon int4 NULL
 );
 
-CREATE INDEX fatonfe_infprot_chnfe_idx ON app.fatonfe USING btree (infprot_chnfe);
 CREATE INDEX idx_infnfe_ide_dhemi ON app.fatonfe USING btree (infnfe_ide_dhemi);
 CREATE INDEX fatonfe_infnfe_ide_mod_idx ON app.fatonfe USING btree (infnfe_ide_mod);
 CREATE INDEX fatonfe_infnfe_emit_cnpj_idx ON app.fatonfe USING btree (infnfe_emit_cnpj);
@@ -255,7 +254,7 @@ CREATE INDEX idx_infnfe_dest_cnpj ON app.fatonfe USING btree (infnfe_dest_cnpj);
 
 CREATE TABLE app.fatoitemnfe(
 	id BIGSERIAL,
-	infProt_chNFe character varying(44) PRIMARY KEY,
+	infProt_chNFe character varying(44),
 	infNFe_det_nItem character varying,
 	infNFe_det_prod_cProd character varying,
 	infNFe_det_prod_cEAN character varying,
