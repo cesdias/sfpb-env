@@ -254,8 +254,8 @@ CREATE INDEX fatonfe_infnfe_emit_ie_idx ON app.fatonfe USING btree (infnfe_emit_
 CREATE INDEX idx_infnfe_dest_cnpj ON app.fatonfe USING btree (infnfe_dest_cnpj);
 
 CREATE TABLE app.fatoitemnfe(
-	id BIGSERIAL PRIMARY KEY,
-	infProt_chNFe character varying(44),
+	id BIGSERIAL,
+	infProt_chNFe character varying(44) PRIMARY KEY,
 	infNFe_det_nItem character varying,
 	infNFe_det_prod_cProd character varying,
 	infNFe_det_prod_cEAN character varying,
