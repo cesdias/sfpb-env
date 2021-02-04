@@ -323,9 +323,9 @@ CREATE INDEX fatonfe_infnfe_emit_ie_idx ON app.fatonfe USING btree (infnfe_emit_
 CREATE INDEX idx_infnfe_dest_cnpj ON app.fatonfe USING btree (infnfe_dest_cnpj);
 
 CREATE TABLE app.fatoitemnfe(
-	id BIGSERIAL,
-	infProt_chNFe character varying(44),
-	infNFe_det_nItem character varying,
+	id BIGSERIAL NOT NULL,
+	infProt_chNFe character varying(44) NOT NULL,
+	infNFe_det_nItem character varying NOT NULL,
 	infNFe_det_prod_cProd character varying,
 	infNFe_det_prod_cEAN character varying,
 	infNFe_det_prod_xProd character varying,
@@ -403,9 +403,9 @@ CREATE TABLE app.fatoitemnfe(
     infNFe_det_imposto_ICMSUFDest_pICMSInterPart numeric(16,2),
     infNFe_det_imposto_ICMSUFDest_vFCPUFDest numeric(16,2),
     infNFe_det_imposto_ICMSUFDest_vICMSUFDest numeric(16,2),
-    infNFe_det_imposto_ICMSUFDest_vICMSUFRemet numeric(16,2)
+    infNFe_det_imposto_ICMSUFDest_vICMSUFRemet numeric(16,2),
+    PRIMARY KEY (infProt_chNFe, infNFe_det_nItem)
 );
-CREATE UNIQUE INDEX fatoitemnfe_unique_index ON app.fatoitemnfe(infProt_chNFe, infNFe_det_nItem);
 CREATE INDEX fatoitemnfe_infprot_chnfe_idx ON app.fatoitemnfe USING btree (infprot_chnfe);
 
 
