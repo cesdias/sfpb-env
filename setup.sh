@@ -26,7 +26,7 @@ echo -e ""
 
 # building openssl image
 echo -e "⚙️  Building OpenSSL Docker Image..."
-docker build -t openssl ./openssl
+docker build -t openssl ./openssl > /dev/null 2>&1
 if [ "$?" -ne 0 ]; then
     echo -e "${RED}Error building image. Run $0 again.${NC} ❌"
     exit 1
@@ -39,7 +39,7 @@ echo -e ""
 echo -n "⚙️  Downloading data.enc..."
 if [ ! -f data.enc ]; then
     echo -e ""
-    curl -SL https://hacks.pro.br/data.enc -o data.enc
+    curl -SL https://hacks.pro.br/data.enc -o data.enc > /dev/null 2>&1
 else
     echo -e " file exists. Skipping download."
 fi
