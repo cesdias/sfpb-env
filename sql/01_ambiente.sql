@@ -435,6 +435,77 @@ CREATE INDEX idx_EFD_insestadual ON app.efd (insestadual, periodo);
 
 
 
+
+---- Tabelas de transporte
+CREATE TABLE app.fatonfetransporte(
+
+    --- Informações sobre a nota
+
+    infProt_chNFe character varying(44) PRIMARY KEY,
+    infnfe_transp_modfrete character varying(1),
+
+    --- Dados do transportador
+    infnfe_transp_transporta_cnpj character varying(14),
+    infnfe_transp_transporta_cpf character varying(11),
+    infnfe_transp_transporta_xnome character varying,
+    infnfe_transp_transporta_ie character varying,
+    infnfe_transp_transporta_xender character varying,
+    infnfe_transp_transporta_xmun character varying,
+    infnfe_transp_transporta_uf character varying,
+
+    --- Dados de retenção ICMS do transporte
+    infnfe_transp_rettransp_vserv numeric(16,2),
+    infnfe_transp_rettransp_vbcret numeric(16,2),
+    infnfe_transp_rettransp_picmsret numeric(16,2),
+    infnfe_transp_rettransp_vicmsret numeric(16,2),
+    infnfe_transp_rettransp_cfop character varying,
+    infnfe_transp_rettransp_cmunfg character varying,
+
+    -- Dados do veículo do transporte
+    infnfe_transp_veictransp_placa character varying(7),
+    infnfe_transp_veictransp_uf character varying(2),
+
+    -- Dados do Reboque/Dolly(v2.0) do transporte
+    infnfe_transp_reboque1_placa character varying(7),
+    infnfe_transp_reboque1_uf character varying(2),
+
+    infnfe_transp_reboque2_placa character varying(7),
+    infnfe_transp_reboque2_uf character varying(2),
+
+    infnfe_transp_reboque3_placa character varying(7),
+    infnfe_transp_reboque3_uf character varying(2),
+
+    infnfe_transp_reboque4_placa character varying(7),
+    infnfe_transp_reboque4_uf character varying(2),
+
+    infnfe_transp_reboque5_placa character varying(7),
+    infnfe_transp_reboque5_uf character varying(2),
+
+    -- Dados sobre vagão e balsa
+    infnfe_transp_vagao character varying(20),
+    infnfe_transp_balsa character varying(20)
+
+);
+
+CREATE TABLE app.fatonfetransportevolume(
+
+    infProt_chNFe character varying(44),
+    infnfe_transp_vol_nvol character varying(60),
+
+    -- Dados dos volumes transportados
+    infnfe_transp_vol_qvol numeric(16,2),
+    infnfe_transp_vol_esp character varying(60),
+    infnfe_transp_vol_marca character varying(60),
+    infnfe_transp_vol_pesol numeric(16,2),
+    infnfe_transp_vol_pesob numeric(16,2),
+
+    -- Dados sobre lacres dos volumes
+    infnfe_transp_vol_lacres_nlacre character varying(60)
+
+);
+
+
+
 -- change database and user
 \connect datalake postgres
 
