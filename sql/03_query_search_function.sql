@@ -20,13 +20,17 @@ CREATE TABLE app.search (
 );
 
 --Cria função para busca fts
-CREATE FUNCTION app.query_fts(search text)
-RETURNS SETOF app.fatoitemnfe AS $$
+CREATE OR REPLACE FUNCTION app.query_fts(search text)
+ RETURNS SETOF app.fatoitemnfe
+ LANGUAGE sql
+ STABLE
+AS $function$
     SELECT *
     FROM app.fatoitemnfe
     WHERE
-      infnfe_det_prod_xprod @@ to_tsquery(search)
-$$ LANGUAGE sql STABLE;
+      to_tsvector('portuguese'::regconfig, infnfe_det_prod_xprod) @@ to_tsquery('portuguese'::regconfig, search)
+$function$
+;
 
 
 CREATE VIEW app.capa_item_view AS
@@ -34,14 +38,18 @@ SELECT *
 FROM app.fatoitemnfe INNER JOIN app.fatonfe using(infprot_chnfe);
 
 --Cria função para busca fts (campos do item e capa da nota)
-CREATE FUNCTION app.query_fts_capa(search text)
-RETURNS SETOF app.capa_item_view AS $$
+CREATE OR REPLACE FUNCTION app.query_fts_capa(search text)
+ RETURNS SETOF app.capa_item_view
+ LANGUAGE sql
+ STABLE
+AS $function$
     SELECT *
     FROM app.fatoitemnfe INNER JOIN app.fatonfe using(infprot_chnfe)
     WHERE
-      infnfe_det_prod_xprod @@ to_tsquery(search);
+      to_tsvector('portuguese'::regconfig, infnfe_det_prod_xprod) @@ to_tsquery('portuguese'::regconfig, search);
 
-$$ LANGUAGE sql STABLE;
+$function$
+;
 
 --Concede permissões de acesso
 -- app
