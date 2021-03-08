@@ -26,7 +26,7 @@ echo -e ""
 
 # building openssl image
 echo -e "⚙️  Building OpenSSL Docker Image..."
-docker build -t openssl ./openssl
+docker build -t openssl ./openssl > /dev/null 2>&1
 if [ "$?" -ne 0 ]; then
     echo -e "${RED}Error building image. Run $0 again.${NC} ❌"
     exit 1
@@ -39,7 +39,7 @@ echo -e ""
 echo -n "⚙️  Downloading data.enc..."
 if [ ! -f data.enc ]; then
     echo -e ""
-    curl -SL https://hacks.pro.br/data.enc -o data.enc
+    curl -SL https://hacks.pro.br/data.enc -o data.enc > /dev/null 2>&1
 else
     echo -e " file exists. Skipping download."
 fi
@@ -118,7 +118,7 @@ done
 
 # restoring hasura metadata
 echo -e "⚙️  Restoring hasura metadata..."
-RES=`curl -sSL -d '{"type":"replace_metadata","args":'$(cat hasura/hasura_metadata-2021_02_05.json)'}' -H "X-Hasura-Admin-Secret: $X_HASURA_ADMIN_SECRET" http://localhost:8080/v1/query`
+RES=`curl -sSL -d '{"type":"replace_metadata","args":'$(cat hasura/hasura_metadata-2021_02_09.json)'}' -H "X-Hasura-Admin-Secret: $X_HASURA_ADMIN_SECRET" http://localhost:8080/v1/query`
 echo -e $RES |grep success
 if [ "$?" -ne 0 ]; then
     echo -e ""
