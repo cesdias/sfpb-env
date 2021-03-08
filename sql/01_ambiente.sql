@@ -507,7 +507,7 @@ CREATE TABLE app.fatonfetransportevolume(
 
 ---- Tabela FatoCTe
 
-CREATE TABLE app.fatocte {
+CREATE TABLE app.fatocte(
 	infcte_versao character varying(4),
 	infcte_id character varying(47),
 	infcte_infctenorm_infcarga_vcarga numeric(13,2),
@@ -802,12 +802,12 @@ CREATE TABLE app.fatocte {
 	infcte_imp_imcsuffim_vicmsuffim numeric(13,2),
 	infcte_imp_imcsuffim_vicmsufini numeric(13,2),
 	protcte_infprot_chcte character varying(44) PRIMARY KEY
-};
+);
 
 
 ---- Tabela FatoMDFe
 
-CREATE TABLE app.fatomdfe {
+CREATE TABLE app.fatomdfe(
 	infmdfe_versao character varying,
 	infmdfe_id character varying(48),
 	infmdfe_ide_cuf character varying(2),
@@ -938,7 +938,7 @@ CREATE TABLE app.fatomdfe {
 	infmdfe_infresptec_idcsrt character varying(3),
 	infmdfe_infresptec_hashcsrt character varying(28),
 	protmdfe_infprot_chmdfe character varying(44) PRIMARY KEY
-};
+);
 
 
 
