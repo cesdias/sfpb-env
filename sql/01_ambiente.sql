@@ -576,14 +576,14 @@ CREATE TABLE app.fatocte(
 	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_cint character varying(10),
 	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_ie character varying(14),
 	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_xnome character varying(60),
-	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_xlgr character varying(255),
-	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_nro character varying(60),
-	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_xcpl character varying(60),
-	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_xbairro character varying(60),
-	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_cmun character varying(7),
-	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_xmun character varying(60),
-	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_cep character varying(8),
-	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_uf character varying(2),
+	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_endf_xlgr character varying(255),
+	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_endf_nro character varying(60),
+	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_endf_xcpl character varying(60),
+	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_endf_xbairro character varying(60),
+	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_endf_cmun character varying(7),
+	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_endf_xmun character varying(60),
+	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_endf_cep character varying(8),
+	infcte_infctenorm_infModal_ferrov_trafmut_ferroenv_endf_uf character varying(2),
 	infcte_infctenorm_infModal_aquav_vprest numeric(13,2),
 	infcte_infctenorm_infModal_aquav_vafrmm numeric(13,2),
 	infcte_infctenorm_infModal_aquav_xnavio character varying(60),
@@ -803,6 +803,7 @@ CREATE TABLE app.fatocte(
 	infcte_imp_imcsuffim_vicmsufini numeric(13,2),
 	protcte_infprot_chcte character varying(44) PRIMARY KEY
 );
+
 
 
 ---- Tabela FatoMDFe
