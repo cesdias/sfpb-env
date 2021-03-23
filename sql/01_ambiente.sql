@@ -508,6 +508,7 @@ CREATE TABLE app.fatonfetransportevolume(
 ---- Tabela FatoCTe
 
 CREATE TABLE app.fatocte(
+	protCTe_infProt_chCTe character varying(44) PRIMARY KEY,
 	infCte_versao character varying(4),
 	infCte_id character varying(47),
 	infCte_infCTeNorm_infCarga_vCarga numeric(13,2),
@@ -800,8 +801,7 @@ CREATE TABLE app.fatocte(
 	infCte_imp_ICMSUFFim_pICMSInter numeric(13,2),
 	infCte_imp_ICMSUFFim_vFCPUFFim numeric(13,2),
 	infCte_imp_ICMSUFFim_vICMSUFFim numeric(13,2),
-	infCte_imp_ICMSUFFim_vICMSUFIni numeric(13,2),
-	protCTe_infProt_chCTe character varying(44) PRIMARY KEY
+	infCte_imp_ICMSUFFim_vICMSUFIni numeric(13,2)
 );
 
 
@@ -809,6 +809,7 @@ CREATE TABLE app.fatocte(
 ---- Tabela FatoMDFe
 
 CREATE TABLE app.fatomdfe(
+	protMDFe_infProt_chMDFe character varying(44) PRIMARY KEY,
 	infMDFe_versao character varying,
 	infMDFe_id character varying(48),
 	infMDFe_ide_cUF character varying(2),
@@ -937,11 +938,34 @@ CREATE TABLE app.fatomdfe(
 	infMDFe_infRespTec_email character varying(60),
 	infMDFe_infRespTec_fone character varying(12),
 	infMDFe_infRespTec_idCSRT character varying(3),
-	infMDFe_infRespTec_hashCSRT character varying(28),
-	protMDFe_infProt_chMDFe character varying(44) PRIMARY KEY
+	infMDFe_infRespTec_hashCSRT character varying(28)
 );
 
-
+-- Tabela fatoeventomdfe
+CREATE TABLE app.fatoeventomdfe(
+	eventoMDFe_infEvento_chMDFe character varying(44) PRIMARY KEY,
+	eventoMDFe_infEvento_cOrgao character varying(3),
+	eventoMDFe_infEvento_tpAmb char(1),
+	eventoMDFe_infEvento_CNPJ character varying(14),
+	eventoMDFe_infEvento_CPF character varying(11),
+	eventoMDFe_infEvento_dhEvento timestamp with time zone,
+	eventoMDFe_infEvento_tpEvento character varying(6),
+	eventoMDFe_infEvento_nSeqEvento character varying(2),
+	eventoMDFe_infEvento_id character varying(54),
+	eventoMDFe_infEvento_detEvento_versaoEvento character varying(4),
+	retEventoMDFe_infEvento_tpAmb char(1),
+	retEventoMDFe_infEvento_verAplic character varying(20),
+	retEventoMDFe_infEvento_cOrgao character varying(2),
+	retEventoMDFe_infEvento_cStat character varying(3),
+	retEventoMDFe_infEvento_xMotivo character varying(255),
+	retEventoMDFe_infEvento_chMDFe character varying(44),
+	retEventoMDFe_infEvento_tpEvento character varying(6),
+	retEventoMDFe_infEvento_xEvento character varying(60),
+	retEventoMDFe_infEvento_nSeqEvento character varying(2),
+	retEventoMDFe_infEvento_dhRegEvento timestamp with time zone,
+	retEventoMDFe_infEvento_nProt character varying(15),
+	retEventoMDFe_infEvento_id character varying(17)
+);
 
 
 
