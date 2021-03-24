@@ -966,8 +966,32 @@ CREATE TABLE app.fatoeventomdfe(
 	retEventoMDFe_infEvento_nProt character varying(15),
 	retEventoMDFe_infEvento_id character varying(17)
 );
-
-
+--
+-- Table fatoeventocte
+CREATE TABLE app.fatoeventocte(
+    eventoCTe_infEvento_chCTe character varying(44) PRIMARY KEY,
+	eventoCTe_infEvento_cOrgao character varying(3),
+	eventoCTe_infEvento_tpAmb char(1),
+	eventoCTe_infEvento_CNPJ character varying(14),
+	eventoCTe_infEvento_CPF character varying(11),
+	eventoCTe_infEvento_dhEvento timestamp with time zone,
+	eventoCTe_infEvento_tpEvento character varying(6),
+	eventoCTe_infEvento_nSeqEvento character varying(2),
+	eventoCTe_infEvento_id character varying(54),
+	eventoCTe_infEvento_detEvento_versaoEvento character varying(4),
+	retEventoCTe_infEvento_tpAmb char(1),
+	retEventoCTe_infEvento_verAplic character varying(20),
+	retEventoCTe_infEvento_cOrgao character varying(2),
+	retEventoCTe_infEvento_cStat character varying(3),
+	retEventoCTe_infEvento_xMotivo character varying(255),
+	retEventoCTe_infEvento_chCTe character varying(44),
+	retEventoCTe_infEvento_tpEvento character varying(6),
+	retEventoCTe_infEvento_xEvento character varying(60),
+	retEventoCTe_infEvento_nSeqEvento character varying(2),
+	retEventoCTe_infEvento_dhRegEvento timestamp with time zone,
+	retEventoCTe_infEvento_nProt character varying(15),
+	retEventoCTe_infEvento_id character varying(17)
+);
 
 -- change database and user
 \connect datalake postgres
