@@ -70,7 +70,7 @@ foo@bar# git clone git@github.com:arialab/sefazpb-ambiente.git
 foo@bar# git clone https://github.com/arialab/sefazpb-ambiente.git
 ```
 
-Obs.: A senha do GitHub deve ser solicitada duas vezes, sendo a 1a referente a clonagem do repositório e a 2a vez referente ao download do arquivo `data.enc` pelo `git lfs`. Uma saída típica para a clonagem do `sefazpb-ambiente` é:
+Obs.: A senha do GitHub deve ser solicitada caso seja utilizado o protocolo HTTPS para clonagem do repositório. Uma saída típica para a clonagem do `sefazpb-ambiente` em HTTPS é:
 
 ```console
 foo@bar# git clone https://github.com/arialab/sefazpb-ambiente.git
@@ -78,54 +78,22 @@ foo@bar# git clone https://github.com/arialab/sefazpb-ambiente.git
 Cloning into 'sefazpb-ambiente'...
 Username for 'https://github.com': <USUARIO>       <== 1a solicitação do usuário
 Password for 'https://cesdias@github.com': <SENHA> <== 1a solicitação da senha
-remote: Enumerating objects: 98, done.
-remote: Counting objects: 100% (98/98), done.
-remote: Compressing objects: 100% (71/71), done.
-remote: Total 314 (delta 63), reused 58 (delta 27), pack-reused 216
-Receiving objects: 100% (314/314), 58.87 MiB | 13.27 MiB/s, done.
-Resolving deltas: 100% (173/173), done.
-Username for 'https://github.com': <USUARIO>       <== 2a solicitação do usuário
-Password for 'https://cesdias@github.com': <SENHA> <== 2a solicitação da senha
+remote: Enumerating objects: 439, done.
+remote: Counting objects: 100% (439/439), done.
+remote: Compressing objects: 100% (240/240), done.
+remote: Total 547 (delta 288), reused 347 (delta 198), pack-reused 108
+Receiving objects: 100% (547/547), 147.27 KiB | 591.00 KiB/s, done.
+Resolving deltas: 100% (350/350), done.
 ```
 
-4) Acesse o repositório clonado e verifique se o arquivo`data.enc` foi baixado corretamente. Este arquivo deve ter aproximadamente 97MB e possuir a mesma assinatura abaixo: 
-
-```console
-foo@bar# cd sefazpb-ambiente
-foo@bar# ls -lah data.enc 
--rw-rw-r-- 1 foo foo 97M jan 21 12:00 data.enc
-
-foo@bar# shasum data.enc
-9a73ecb12af0dccfe536b97285aaefa8a03d0489  data.enc
-```
-
-Caso o arquivo não tenha essa assinatura ou o tamanho esperado, o `git lfs` pode não estar instalado/inicializado e consequentemente o arquivo `data.enc` correto não foi baixado do GitHub. Reveja a instalação do `git lfs`.
-
-Caso o `git lfs` esteja corretamente instalado, tente baixar manualmente o arquivo `data.enc` pelo `git lfs`:
-
-```console
-foo@bar# cd sefazpb-ambiente
-foo@bar# git lfs pull data.enc
-Username for 'https://github.com': <USUARIO>
-Password for 'https://cesdias@github.com': <SENHA>
-Downloading LFS objects: 100% (1/1), 102 MB | 19 MB/s
-```
-
-Verifique novamente a assinatura:
-
-```console
-foo@bar# shasum data.enc
-9a73ecb12af0dccfe536b97285aaefa8a03d0489  data.enc
-```
-
-5) Prepare o script `setup.sh` para execução.
+4) Prepare o script `setup.sh` para execução.
 
 ```console
 foo@bar# cd sefazpb-ambiente
 foo@bar# chmod a+x setup.sh
 ```
 
-6) Execute o script de instalação chamado `setup.sh` passando como parâmetro a chave secreta. Ex.:
+5) Execute o script de instalação chamado `setup.sh` passando como parâmetro a chave secreta. Ex.:
 ```console
 foo@bar# ./setup.sh 123456789abcdefg
 ```
@@ -213,10 +181,38 @@ graphql-engine_1  | {"type":"startup","timestamp":"2021-01-21T16:34:26.117+0000"
 
 :warning: A partir da destruição do ambiente, nenhum dos comandos acima irá funcionar, sendo necessário recriar o ambiente a partir do `setup.sh`.
 
+O conceito de `destruição do ambiente` está relacionado a remover as imagens e arquivos de configuração relacionados ao `sefazpb-ambiente`.
+
+Para realizar alguma das etapas abaixo é necessário que o ambiente esteja parado. Para parar o ambiente, faça:
+
 ```console
 foo@bar# docker-compose down
-docker volume rm sefazpb-ambiente_pgdata
 ```
+
+#### Removendo os volumes
+
+Apenas um volume para armazenar os dados do PostgreSQL é criado pelo `sefazpb-ambiente`. Para apagá-lo, faça:
+
+```console
+foo@bar# docker volume rm sefazpb-ambiente_pgdata
+```
+
+Uma vez que o volume `sefazpb-ambiente_pgdata` é apagado, é necessário rodar novamente o script `setup.sh` (ver Item 4 da seção de Instalação do Ambiente).
+
+#### Removendo imagens
+
+Para remover todas as imagens docker utilizadas pelo `sefazpb-ambiente`, faça:
+
+```console
+foo@bar# docker image rm openssl:latest
+foo@bar# docker image rm alpine:3.12
+foo@bar# docker image rm hasura/graphql-engine:v1.3.2
+foo@bar# docker image rm cesdias/postgres13-anon:1.1
+```
+
+:warning: a) Essas são as versões atuais das imagens, porém o `sefazpb-ambiente` está em constante evolução e as versões ou números podem variar ligeiramente. Sempre verifique quais as imagens instaladas pelo ambiente utilizando o comando `docker images list`.
+
+:warning: b) Apagar as imagens implica que ao rodar o `setup.sh` novamente, aproximadamente 1.5GB de dados será baixado. Considere esta informação antes de realizar esta etapa.
 
 ## Cargas das amostras de dados
 
