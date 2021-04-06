@@ -1376,7 +1376,7 @@ create or replace function hasura_auth(email in varchar, cleartext_password in v
                 'sub', id::text,
                 'iss', 'Hasura-JWT-Auth',
                 'iat', round(extract(epoch from now())),
-                'exp', round(extract(epoch from now() + interval '24 hour')),
+                'exp', round(extract(epoch from now() + interval '7 days')),
                 'https://hasura.io/jwt/claims', json_build_object(
                     'x-hasura-user-id', id::text,
                     'x-hasura-default-role', default_role,
