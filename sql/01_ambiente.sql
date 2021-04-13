@@ -993,6 +993,28 @@ CREATE TABLE app.fatoeventocte(
 	retEventoCTe_infEvento_id character varying(17)
 );
 
+
+-- Tabela fatoevento
+CREATE TABLE app.fatovento(
+    id SERIAL PRIMARY KEY,
+    evento_chdfe character varying(44),                                     -- Chave do DFe associado ao evento
+    evento_tipo_dfe character varying(2),                                   -- Tipo do documento: MDFE ou CTE
+    evento_infevento_dhregpassagem timestamp without time zone,             -- Data e hora do evento
+    evento_infevento_dsreflocal character varying(60),                      -- Referência do local do evento
+    evento_infevento_dstipoveiculo character varying(20),                   -- Tipo do veículo
+    evento_infevento_nocor character varying(20),                           -- Cor do veículo
+    evento_infevento_nomarcamodelo character varying(40),                   -- Marca e modelo do veículo
+    evento_infevento_norodovia character varying(5),                        -- Rodovia em que o evento aconteceu
+    evento_infevento_nrlatitude float,                                      -- Latitude onde o evento aconteceu
+    evento_infevento_nrlongitude float,                                     -- Longitude de onde o evento aconteceu
+    evento_infevento_nrplaca character varying(7),                          -- Placa do veículo vinculado ao evento
+    evento_infevento_nrvelocidade int,                                      -- Velocidade do veículo
+    evento_infevento_nrkmrodovia int,                                       -- Quilometragem da rodovia no local do evento
+    evento_infevento_sguf character varying(2),                             -- UF em que o evento aconteceu
+    evento_infevento_tpsentido character varying(40),                       -- Sentido da rodovia onde o evento aconteceu
+    evento_infevento_tpvia char
+);
+
 -- change database and user
 \connect datalake postgres
 
