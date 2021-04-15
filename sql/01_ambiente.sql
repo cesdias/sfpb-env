@@ -1015,6 +1015,13 @@ CREATE TABLE app.fatovento(
     evento_infevento_tpvia char
 );
 
+-- Tabela fatocamera
+CREATE TABLE app.fatocamera(
+    id SERIAL PRIMARY KEY,
+    nrlatitude float,                    -- Latitude da câmera
+    nrlongitude float                    -- Longitude da câmera
+);
+
 -- change database and user
 \connect datalake postgres
 
