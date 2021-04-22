@@ -1018,6 +1018,10 @@ CREATE TABLE app.fatovento(
 -- Tabela fatocamera
 CREATE TABLE app.fatocamera(
     id SERIAL PRIMARY KEY,
+    category character varying(40),
+    name character varying(80),
+    description character varying(256),
+    status boolean,
     nrlatitude float,                    -- Latitude da câmera
     nrlongitude float                    -- Longitude da câmera
 );
