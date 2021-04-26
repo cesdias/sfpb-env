@@ -995,7 +995,7 @@ CREATE TABLE app.fatoeventocte(
 
 
 -- Tabela fatoevento
-CREATE TABLE app.fatovento(
+CREATE TABLE app.fatoevento(
     id SERIAL PRIMARY KEY,
     evento_chdfe character varying(44),                                     -- Chave do DFe associado ao evento
     evento_tipo_dfe character varying(2),                                   -- Tipo do documento: MDFE ou CTE
