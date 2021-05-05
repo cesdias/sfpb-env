@@ -56,7 +56,7 @@ INSERT INTO app.label VALUES
     (20, 'infnfe_ide_procemi', 'integer', 'Processo de emissão utilizado com a seguinte codificação', 'não', '0 - Emissão de NF-e com aplicativo do contribuinte; 1 - Emissão de NF-e avulsa pelo Fisco; 2 - Emissão de NF-e avulsa, pelo contribuinte com seu certificado digital, através do sitedo Fisco; 3 - 
     Emissão de NF-e pelo contribuinte com aplicativo fornecido pelo Fisco.', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe'),
     (21, 'infnfe_ide_verproc', 'character varying', 'Versão do aplicativo utilizado no processo de emissão', 'não', NULL, 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe'),
-    (22, 'infnfe_emit_cnpj', 'character varying', 'Número do CNPJ do emitente', 'sim', 'Tipo de dado no BD é diferente (varchar), o tipo consta na label como char(14) para evitar que a busca use nesse campo ilike', 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
+    (22, 'infnfe_emit_cnpj', 'char(14)', 'Número do CNPJ do emitente', 'sim', 'Tipo de dado no BD é diferente (varchar), o tipo consta na label como char(14) para evitar que a busca use nesse campo ilike', 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
     (23, 'infnfe_emit_cpf', 'character varying', 'Número do CPF do emitente', 'sim', NULL, 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
     (24, 'infnfe_emit_xnome', 'character varying', 'Razão Social ou Nome do emitente', 'sim', NULL, 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
     (25, 'infnfe_emit_xfant', 'character varying', 'Nome fantasia do emitente', 'sim', NULL, 'Grupo C. Identificação do Emitente da Nota Fiscal eletrônica', 'fatonfe'),
