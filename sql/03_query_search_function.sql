@@ -11,7 +11,7 @@ CREATE EXTENSION pg_trgm;
 
 
 --Cria índice na tabela fatoitemnfe
-CREATE INDEX idx_fts_fatoitemnfe ON app.fatoitemnfe USING GIN (to_tsvector('portuguese', infnfe_det_prod_xprod));
+CREATE INDEX fatoitemnfe_infnfe_det_prod_xprod_fts_idx ON app.fatoitemnfe USING GIN (to_tsvector('portuguese', infnfe_det_prod_xprod));
 
 --CRIA TABELA PARA BUSCA
 CREATE TABLE app.search (
