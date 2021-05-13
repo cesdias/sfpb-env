@@ -22,7 +22,7 @@ CREATE SCHEMA cicc;
 
 -- tables
 CREATE TABLE app.label (
-    id serial,
+    id serial PRIMARY KEY,
     nomecoluna text,
     tipodado text,
     descricao text,
@@ -216,6 +216,7 @@ INSERT INTO app.label VALUES (179, 'infnfe_det_imposto_icmsufdest_vicmsufremet',
 
 
 CREATE TABLE app.fatonfe(
+	id BIGSERIAL NOT NULL,
 	infProt_chNFe character varying(44) PRIMARY KEY,
  	infNFe_ide character varying,
 	infNFe_ide_cUF integer,
@@ -315,12 +316,13 @@ CREATE TABLE app.fatonfe(
 	informix_nrportacon int4 NULL
 );
 
+CREATE INDEX fatonfe_id_idx ON app.fatonfe USING btree (id);
 CREATE INDEX fatonfe_infprot_chnfe_idx ON app.fatonfe USING btree (infprot_chnfe);
-CREATE INDEX idx_infnfe_ide_dhemi ON app.fatonfe USING btree (infnfe_ide_dhemi);
 CREATE INDEX fatonfe_infnfe_ide_mod_idx ON app.fatonfe USING btree (infnfe_ide_mod);
+CREATE INDEX fatonfe_infnfe_ide_dhemi ON app.fatonfe USING btree (infnfe_ide_dhemi);
 CREATE INDEX fatonfe_infnfe_emit_cnpj_idx ON app.fatonfe USING btree (infnfe_emit_cnpj);
 CREATE INDEX fatonfe_infnfe_emit_ie_idx ON app.fatonfe USING btree (infnfe_emit_ie);
-CREATE INDEX idx_infnfe_dest_cnpj ON app.fatonfe USING btree (infnfe_dest_cnpj);
+CREATE INDEX fatonfe_infnfe_dest_cnpj_idx ON app.fatonfe USING btree (infnfe_dest_cnpj);
 
 CREATE TABLE app.fatoitemnfe(
 	id BIGSERIAL NOT NULL,
@@ -339,73 +341,74 @@ CREATE TABLE app.fatoitemnfe(
 	infNFe_det_prod_uTrib character varying,
 	infNFe_det_prod_qTrib numeric(16,2),
 	infNFe_det_prod_vUnTrib numeric(16,2),
-    infnfe_det_prod_vFrete numeric(16,2),
-    infnfe_det_prod_vSeg numeric(16,2),
-    infNFe_det_prod_vDesc numeric(16,2),
-    infnfe_det_prod_vOutro numeric(16,2),
+	infnfe_det_prod_vFrete numeric(16,2),
+	infnfe_det_prod_vSeg numeric(16,2),
+	infNFe_det_prod_vDesc numeric(16,2),
+	infnfe_det_prod_vOutro numeric(16,2),
 	infNFe_det_prod_indTot character varying,
 	infNFe_det_imposto_vTotTrib numeric(16,2),
 	infNFe_det_imposto_ICMS_orig character varying(1),
 	infNFe_det_imposto_ICMS_CST character varying(3),
-    infNFe_det_imposto_ICMS_CSOSN character varying,
-   	infNFe_det_imposto_ICMS_vBCSTRet numeric(16,2),
-   	infNFe_det_imposto_ICMS_pST numeric(16,2),
-   	infNFe_det_imposto_ICMS_vICMSSubstituto numeric(16,2),
-    infNFe_det_imposto_ICMS_vICMSSTRet numeric(16,2),
-    infNFe_det_imposto_ICMS_vBCFCPSTRet numeric(16,2),
-    infNFe_det_imposto_ICMS_pFCPSTRet numeric(16,2),
-    infNFe_det_imposto_ICMS_vFCPSTRet numeric(16,2),
-    infNFe_det_imposto_ICMS_vBCSTDest numeric(16,2),
-    infNFe_det_imposto_ICMS_vICMSSTDest numeric(16,2),
-    infNFe_det_imposto_ICMS_pRedBCEfet numeric(16,2),
-    infNFe_det_imposto_ICMS_vBCEfet numeric(16,2),
-    infNFe_det_imposto_ICMS_pICMSEfet numeric(16,2),
-    infNFe_det_imposto_ICMS_vICMSEfet numeric(16,2),
+	infNFe_det_imposto_ICMS_CSOSN character varying,
+	infNFe_det_imposto_ICMS_vBCSTRet numeric(16,2),
+	infNFe_det_imposto_ICMS_pST numeric(16,2),
+	infNFe_det_imposto_ICMS_vICMSSubstituto numeric(16,2),
+	infNFe_det_imposto_ICMS_vICMSSTRet numeric(16,2),
+	infNFe_det_imposto_ICMS_vBCFCPSTRet numeric(16,2),
+	infNFe_det_imposto_ICMS_pFCPSTRet numeric(16,2),
+	infNFe_det_imposto_ICMS_vFCPSTRet numeric(16,2),
+	infNFe_det_imposto_ICMS_vBCSTDest numeric(16,2),
+	infNFe_det_imposto_ICMS_vICMSSTDest numeric(16,2),
+	infNFe_det_imposto_ICMS_pRedBCEfet numeric(16,2),
+	infNFe_det_imposto_ICMS_vBCEfet numeric(16,2),
+	infNFe_det_imposto_ICMS_pICMSEfet numeric(16,2),
+	infNFe_det_imposto_ICMS_vICMSEfet numeric(16,2),
 	infNFe_det_imposto_ICMS_modBC character varying(1),
-    infNFe_det_imposto_ICMS_pRedBC numeric(16,2),
+	infNFe_det_imposto_ICMS_pRedBC numeric(16,2),
 	infNFe_det_imposto_ICMS_vBC numeric(16,2),
 	infNFe_det_imposto_ICMS_pICMS numeric(16,2),
 	infNFe_det_imposto_ICMS_vICMSOp numeric(16,2),
 	infNFe_det_imposto_ICMS_pDif numeric(16,2),
 	infNFe_det_imposto_ICMS_vICMSDif numeric(16,2),
-    infNFe_det_imposto_ICMS_vICMS numeric(16,2),
+	infNFe_det_imposto_ICMS_vICMS numeric(16,2),
 	infNFe_det_imposto_ICMS_vBCFCP numeric(16,2),
-    infNFe_det_imposto_ICMS_pFCP numeric(16,2),
-    infNFe_det_imposto_ICMS_vFCP numeric(16,2),
-    infNFe_det_imposto_ICMS_pFCPDif numeric(16,2),
-    infNFe_det_imposto_ICMS_vFCPDif numeric(16,2),
-    infNFe_det_imposto_ICMS_vFCPEfet numeric(16,2),
-   	infNFe_det_imposto_ICMS_modBCST character varying(1),
-    infNFe_det_imposto_ICMS_pMVAST numeric(16,2),
-    infNFe_det_imposto_ICMS_pRedBCST numeric(16,2),
-    infNFe_det_imposto_ICMS_vBCST numeric(16,2),
-    infNFe_det_imposto_ICMS_pICMSST numeric(16,2),
-    infNFe_det_imposto_ICMS_vICMSST numeric(16,2),
-    infNFe_det_imposto_ICMS_vBCFCPST numeric(16,2),
-    infNFe_det_imposto_ICMS_pFCPST numeric(16,2),
-    infNFe_det_imposto_ICMS_vFCPST numeric(16,2),
-    infNFe_det_imposto_ICMS_vICMSDeson numeric(16,2),
-    infNFe_det_imposto_ICMS_motDesICMS character varying(3),
-    infNFe_det_imposto_ICMS_vICMSSTDeson numeric(16,2),
-    infNFe_det_imposto_ICMS_motDesICMSST character varying(3),
-    infNFe_det_imposto_ICMS_pBCOp numeric(16,2),
-    infNFe_det_imposto_ICMS_UFST character varying(2),
-    infNFe_det_imposto_ICMS_pCredSN numeric(16,2),
-    infNFe_det_imposto_II_vBC numeric(16,2),
-    infNFe_det_imposto_II_vDespAdu numeric(16,2),
-    infNFe_det_imposto_II_vII numeric(16,2),
-    infNFe_det_imposto_II_vIOF numeric(16,2),
-    infNFe_det_imposto_ICMSUFDest_vBCUFDest numeric(16,2),
-    infNFe_det_imposto_ICMSUFDest_vBCFCPUFDest numeric(16,2),
-    infNFe_det_imposto_ICMSUFDest_pFCPUFDest numeric(16,2),
-    infNFe_det_imposto_ICMSUFDest_pICMSUFDest numeric(16,2),
-    infNFe_det_imposto_ICMSUFDest_pICMSInter character varying,
-    infNFe_det_imposto_ICMSUFDest_pICMSInterPart numeric(16,2),
-    infNFe_det_imposto_ICMSUFDest_vFCPUFDest numeric(16,2),
-    infNFe_det_imposto_ICMSUFDest_vICMSUFDest numeric(16,2),
-    infNFe_det_imposto_ICMSUFDest_vICMSUFRemet numeric(16,2),
-    PRIMARY KEY (infProt_chNFe, infNFe_det_nItem)
+	infNFe_det_imposto_ICMS_pFCP numeric(16,2),
+	infNFe_det_imposto_ICMS_vFCP numeric(16,2),
+	infNFe_det_imposto_ICMS_pFCPDif numeric(16,2),
+	infNFe_det_imposto_ICMS_vFCPDif numeric(16,2),
+	infNFe_det_imposto_ICMS_vFCPEfet numeric(16,2),
+	infNFe_det_imposto_ICMS_modBCST character varying(1),
+	infNFe_det_imposto_ICMS_pMVAST numeric(16,2),
+	infNFe_det_imposto_ICMS_pRedBCST numeric(16,2),
+	infNFe_det_imposto_ICMS_vBCST numeric(16,2),
+	infNFe_det_imposto_ICMS_pICMSST numeric(16,2),
+	infNFe_det_imposto_ICMS_vICMSST numeric(16,2),
+	infNFe_det_imposto_ICMS_vBCFCPST numeric(16,2),
+	infNFe_det_imposto_ICMS_pFCPST numeric(16,2),
+	infNFe_det_imposto_ICMS_vFCPST numeric(16,2),
+	infNFe_det_imposto_ICMS_vICMSDeson numeric(16,2),
+	infNFe_det_imposto_ICMS_motDesICMS character varying(3),
+	infNFe_det_imposto_ICMS_vICMSSTDeson numeric(16,2),
+	infNFe_det_imposto_ICMS_motDesICMSST character varying(3),
+	infNFe_det_imposto_ICMS_pBCOp numeric(16,2),
+	infNFe_det_imposto_ICMS_UFST character varying(2),
+	infNFe_det_imposto_ICMS_pCredSN numeric(16,2),
+	infNFe_det_imposto_II_vBC numeric(16,2),
+	infNFe_det_imposto_II_vDespAdu numeric(16,2),
+	infNFe_det_imposto_II_vII numeric(16,2),
+	infNFe_det_imposto_II_vIOF numeric(16,2),
+	infNFe_det_imposto_ICMSUFDest_vBCUFDest numeric(16,2),
+	infNFe_det_imposto_ICMSUFDest_vBCFCPUFDest numeric(16,2),
+	infNFe_det_imposto_ICMSUFDest_pFCPUFDest numeric(16,2),
+	infNFe_det_imposto_ICMSUFDest_pICMSUFDest numeric(16,2),
+	infNFe_det_imposto_ICMSUFDest_pICMSInter character varying,
+	infNFe_det_imposto_ICMSUFDest_pICMSInterPart numeric(16,2),
+	infNFe_det_imposto_ICMSUFDest_vFCPUFDest numeric(16,2),
+	infNFe_det_imposto_ICMSUFDest_vICMSUFDest numeric(16,2),
+	infNFe_det_imposto_ICMSUFDest_vICMSUFRemet numeric(16,2),
+	PRIMARY KEY (infProt_chNFe, infNFe_det_nItem)
 );
+CREATE INDEX fatoitemnfe_id_idx ON app.fatoitemnfe USING btree (id);
 CREATE INDEX fatoitemnfe_infprot_chnfe_idx ON app.fatoitemnfe USING btree (infprot_chnfe);
 
 
@@ -489,7 +492,7 @@ CREATE TABLE app.fatonfetransporte(
 
 CREATE TABLE app.fatonfetransportevolume(
 
-    infProt_chNFe character varying(44),
+    infProt_chNFe character varying(44) PRIMARY KEY,
     infnfe_transp_vol_nvol character varying(60),
 
     -- Dados dos volumes transportados
