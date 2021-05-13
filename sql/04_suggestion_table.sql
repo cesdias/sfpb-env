@@ -8,7 +8,7 @@ GROUP BY infnfe_det_prod_xprod
 HAVING COUNT(*) >= 50;
 
 -- Cria índice para tabela de sugestão
-CREATE INDEX xprod_suggest_idx ON app.suggestion USING GIN (infnfe_det_prod_xprod gin_trgm_ops);
+CREATE INDEX suggestion_infnfe_det_prod_xprod_fts_idx ON app.suggestion USING GIN (infnfe_det_prod_xprod gin_trgm_ops);
 
 CREATE FUNCTION  app.query_suggestion_trgm(word_search varchar) RETURNS SETOF app.search AS $$
 	SELECT infnfe_det_prod_xprod, COUNT(*)
