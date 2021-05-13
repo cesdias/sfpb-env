@@ -1186,6 +1186,7 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA anon TO datalakeuser;
 -- creating anon mviews
 
 CREATE MATERIALIZED VIEW appmask.fatonfe AS SELECT
+    id_fatonfe,
     infNFe_ide,
     infNFe_ide_cUF,
     anon.pseudo_iban(infNFe_ide_cNF) AS infNFe_ide_cNF,
@@ -1280,7 +1281,7 @@ FROM app.fatonfe;
 
 
 CREATE MATERIALIZED VIEW appmask.fatoitemnfe AS SELECT
-    id,
+    id_fatoitemnfe,
     encode(digest(infProt_chNFe, 'sha256'), 'hex') AS infProt_chNFe,
    	infNFe_det_nItem,
 	infNFe_det_prod_cProd,
