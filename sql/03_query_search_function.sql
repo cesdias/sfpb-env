@@ -35,7 +35,7 @@ $function$
 
 CREATE VIEW app.capa_item_view AS
 SELECT *
-FROM app.fatoitemnfe as a INNER JOIN app.fatonfe as b using(infprot_chnfe);
+FROM app.fatoitemnfe INNER JOIN app.fatonfe using(infprot_chnfe);
 
 --Cria função para busca fts (campos do item e capa da nota)
 CREATE OR REPLACE FUNCTION app.query_fts_capa(search text)
