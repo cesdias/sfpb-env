@@ -32,7 +32,7 @@ CREATE TABLE app.label (
     tabela text
 );
 
-INSERT INTO app.label VALUES (1, 'id', 'bigserial', 'Índice de fatonfe', 'não', NULL, NULL, 'fatonfe');
+INSERT INTO app.label VALUES (1, 'id_fatonfe', 'bigserial', 'Índice de fatonfe', 'não', NULL, NULL, 'fatonfe');
 INSERT INTO app.label VALUES (2, 'infprot_chnfe', 'character varying', 'Chaves de acesso da NF-e', 'sim', 'compostas por: UF do emitente, AAMM da emissão da NFe, CNPJ do emitente, modelo, série e número da NF-e e código numérico+DV', NULL, 'fatonfe');
 INSERT INTO app.label VALUES (3, 'infnfe_ide', 'character varying', 'Identificação da NF-e', 'não', NULL, 'Grupo A. Dados da Nota Fiscal eletrônica', 'fatonfe');
 INSERT INTO app.label VALUES (4, 'infnfe_ide_cuf', 'integer', 'Código da UF do emitente do Documento Fiscal', 'não', 'Número aleatório que compõe o código numérico gerado pelo emitente para cada NF-e', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe');
@@ -132,7 +132,7 @@ INSERT INTO app.label VALUES (95, 'informix_stnfeletronica', 'character', 'Situa
 INSERT INTO app.label VALUES (96, 'informix_dhconexao', 'character varying', 'Data e hora da conexão de envio da Nota Fiscal Eletrônica', 'não', NULL, 'Informações do Informix', 'fatonfe');
 INSERT INTO app.label VALUES (97, 'informix_nriptransmissor', 'character varying', 'IP da conexão de envio da Nota Fiscal Eletrônica', 'sim', NULL, 'Informações do Informix', 'fatonfe');
 INSERT INTO app.label VALUES (98, 'informix_nrportacon', 'integer', 'Porta da conexão de envio da Nota Fiscal Eletrônica', 'não', NULL, 'Informações do Informix', 'fatonfe');
-INSERT INTO app.label VALUES (99, 'id', 'bigserial', 'Índice de fatoitemnfe', 'não', NULL, NULL, 'fatoitemnfe');
+INSERT INTO app.label VALUES (99, 'id_fatoitemnfe', 'bigserial', 'Índice de fatoitemnfe', 'não', NULL, NULL, 'fatoitemnfe');
 INSERT INTO app.label VALUES (100, 'infprot_chnfe', 'character varying', 'Chaves de acesso da NF-e', 'sim', 'compostas por: UF do emitente, AAMM da emissão da NFe, CNPJ do emitente, modelo, série e número da NF-e e código numérico+DV', NULL, 'fatoitemnfe');
 INSERT INTO app.label VALUES (101, 'infnfe_det_nitem', 'character varying', 'Dados dos detalhes da NF-e', 'não', NULL, 'Grupo I. Produtos e Serviços da NF-e', 'fatoitemnfe');
 INSERT INTO app.label VALUES (102, 'infnfe_det_prod_cprod', 'character varying', 'Código do produto ou serviço', 'não', 'Preencher com CFOP caso se trate de itens não relacionados com mercadorias/produto e que o contribuinte não possua codificação própriaFormato ”CFOP9999”', 'Grupo I. Produtos e Serviços da NF-e', 'fatoitemnfe');
@@ -216,7 +216,7 @@ INSERT INTO app.label VALUES (179, 'infnfe_det_imposto_icmsufdest_vicmsufremet',
 
 
 CREATE TABLE app.fatonfe(
-	id BIGSERIAL NOT NULL,
+	id_fatonfe BIGSERIAL NOT NULL,
 	infProt_chNFe character varying(44) PRIMARY KEY,
  	infNFe_ide character varying,
 	infNFe_ide_cUF integer,
@@ -316,7 +316,7 @@ CREATE TABLE app.fatonfe(
 	informix_nrportacon int4 NULL
 );
 
-CREATE INDEX fatonfe_id_idx ON app.fatonfe USING btree (id);
+CREATE INDEX fatonfe_id_idx ON app.fatonfe USING btree (id_fatonfe);
 CREATE INDEX fatonfe_infprot_chnfe_idx ON app.fatonfe USING btree (infprot_chnfe);
 CREATE INDEX fatonfe_infnfe_ide_mod_idx ON app.fatonfe USING btree (infnfe_ide_mod);
 CREATE INDEX fatonfe_infnfe_ide_dhemi ON app.fatonfe USING btree (infnfe_ide_dhemi);
@@ -325,7 +325,7 @@ CREATE INDEX fatonfe_infnfe_emit_ie_idx ON app.fatonfe USING btree (infnfe_emit_
 CREATE INDEX fatonfe_infnfe_dest_cnpj_idx ON app.fatonfe USING btree (infnfe_dest_cnpj);
 
 CREATE TABLE app.fatoitemnfe(
-	id BIGSERIAL NOT NULL,
+	id_fatoitemnfe BIGSERIAL NOT NULL,
 	infProt_chNFe character varying(44) NOT NULL,
 	infNFe_det_nItem character varying NOT NULL,
 	infNFe_det_prod_cProd character varying,
@@ -408,7 +408,7 @@ CREATE TABLE app.fatoitemnfe(
 	infNFe_det_imposto_ICMSUFDest_vICMSUFRemet numeric(16,2),
 	PRIMARY KEY (infProt_chNFe, infNFe_det_nItem)
 );
-CREATE INDEX fatoitemnfe_id_idx ON app.fatoitemnfe USING btree (id);
+CREATE INDEX fatoitemnfe_id_idx ON app.fatoitemnfe USING btree (id_fatoitemnfe);
 CREATE INDEX fatoitemnfe_infprot_chnfe_idx ON app.fatoitemnfe USING btree (infprot_chnfe);
 
 
