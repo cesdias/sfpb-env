@@ -237,8 +237,8 @@ CREATE TABLE app.fatonfe(
 	infNFe_ide_indPres integer,
 	infNFe_ide_procEmi integer,
 	infNFe_ide_verProc character varying,
-	infNFe_emit_CNPJ character varying,
-	infNFe_emit_CPF character varying,
+	infNFe_emit_CNPJ char(14),
+	infNFe_emit_CPF char(11),
 	infNFe_emit_xNome character varying,
 	infNFe_emit_xFant character varying,
 	infNFe_emit_enderEmit_xLgr character varying,
@@ -257,8 +257,8 @@ CREATE TABLE app.fatonfe(
 	infNFe_emit_IM character varying,
 	infNFe_emit_CNAE character varying,
 	infNFe_emit_CRT character varying,
-	infNFe_dest_CNPJ character varying,
-	infNFe_dest_CPF character varying,
+	infNFe_dest_CNPJ char(14),
+	infNFe_dest_CPF char(11),
 	infNFe_dest_idEstrangeiro character varying,
 	infNFe_dest_xNome character varying,
 	infNFe_dest_enderDest_xLgr character varying,
@@ -315,7 +315,6 @@ CREATE TABLE app.fatonfe(
 );
 
 CREATE INDEX fatonfe_id_idx ON app.fatonfe USING btree (id_fatonfe);
-CREATE INDEX fatonfe_infprot_chnfe_idx ON app.fatonfe USING btree (infprot_chnfe);
 CREATE INDEX fatonfe_infnfe_ide_mod_idx ON app.fatonfe USING btree (infnfe_ide_mod);
 CREATE INDEX fatonfe_infnfe_ide_dhemi ON app.fatonfe USING btree (infnfe_ide_dhemi);
 CREATE INDEX fatonfe_infnfe_emit_cnpj_idx ON app.fatonfe USING btree (infnfe_emit_cnpj);
