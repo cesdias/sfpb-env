@@ -943,7 +943,7 @@ CREATE TABLE app.fatomdfe(
 
 -- Tabela fatoeventomdfe
 CREATE TABLE app.fatoeventomdfe(
-	eventoMDFe_infEvento_chMDFe character varying(44) PRIMARY KEY,
+	eventoMDFe_infEvento_chMDFe character varying(44),
 	eventoMDFe_versao character varying(4),
 	eventoMDFe_infEvento_cOrgao character varying(3),
 	eventoMDFe_infEvento_tpAmb char(1),
@@ -952,7 +952,7 @@ CREATE TABLE app.fatoeventomdfe(
 	eventoMDFe_infEvento_dhEvento timestamp with time zone,
 	eventoMDFe_infEvento_tpEvento character varying(6),
 	eventoMDFe_infEvento_nSeqEvento character varying(2),
-	eventoMDFe_infEvento_Id character varying(54),
+	eventoMDFe_infEvento_Id character varying(54) PRIMARY KEY,
 	eventoMDFe_infEvento_detEvento_Passagem_descEvento character varying(255),
 	eventoMDFe_infEvento_detEvento_Passagem_cUFTransito character varying(2),
 	eventoMDFe_infEvento_detEvento_Passagem_cUnidFiscal character varying(4),
@@ -1007,7 +1007,7 @@ CREATE TABLE app.fatoeventomdfe(
 --
 -- Table fatoeventocte
 CREATE TABLE app.fatoeventocte(
-	eventoCTe_infEvento_chCTe character varying(44) PRIMARY KEY,
+	eventoCTe_infEvento_chCTe character varying(44),
 	eventoCTe_versao character varying(4),
 	eventoCTe_infEvento_cOrgao character varying(3),
 	eventoCTe_infEvento_tpAmb char(1),
@@ -1016,7 +1016,7 @@ CREATE TABLE app.fatoeventocte(
 	eventoCTe_infEvento_dhEvento timestamp with time zone,
 	eventoCTe_infEvento_tpEvento character varying(6),
 	eventoCTe_infEvento_nSeqEvento character varying(2),
-	eventoCTe_infEvento_Id character varying(54),
+	eventoCTe_infEvento_Id character varying(54) PRIMARY KEY,
 	eventoCTe_infEvento_detEvento_Passagem_descEvento character varying(255),
 	eventoCTe_infEvento_detEvento_Passagem_cUFTransito character varying(2),
 	eventoCTe_infEvento_detEvento_Passagem_cUnidFiscal character varying(100),
