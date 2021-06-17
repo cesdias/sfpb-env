@@ -32,7 +32,7 @@ CREATE TABLE app.label (
 );
 
 INSERT INTO app.label VALUES (1, 'id_fatonfe', 'bigserial', 'Índice de fatonfe', 'não', NULL, NULL, 'fatonfe');
-INSERT INTO app.label VALUES (2, 'infprot_chnfe', 'character varying', 'Chaves de acesso da NF-e', 'sim', 'compostas por: UF do emitente, AAMM da emissão da NFe, CNPJ do emitente, modelo, série e número da NF-e e código numérico+DV', NULL, 'fatonfe');
+INSERT INTO app.label VALUES (2, 'infprot_chnfe', 'char(44)', 'Chaves de acesso da NF-e', 'sim', 'compostas por: UF do emitente, AAMM da emissão da NFe, CNPJ do emitente, modelo, série e número da NF-e e código numérico+DV', NULL, 'fatonfe');
 INSERT INTO app.label VALUES (3, 'infnfe_ide', 'character varying', 'Identificação da NF-e', 'não', NULL, 'Grupo A. Dados da Nota Fiscal eletrônica', 'fatonfe');
 INSERT INTO app.label VALUES (4, 'infnfe_ide_cuf', 'integer', 'Código da UF do emitente do Documento Fiscal', 'não', 'Número aleatório que compõe o código numérico gerado pelo emitente para cada NF-e', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe');
 INSERT INTO app.label VALUES (5, 'infnfe_ide_cnf', 'character varying', 'Código numérico para evitar acesso indevido', 'sim', 'Número aleatório que compõe o código numérico gerado pelo emitente para cada NF-e', 'Grupo B. Identificação da Nota Fiscal eletrônica', 'fatonfe');
@@ -104,7 +104,6 @@ INSERT INTO app.label VALUES (70, 'infnfe_total_icmstot_vfcp', 'numeric', 'Valor
 INSERT INTO app.label VALUES (71, 'infnfe_total_icmstot_vbcst', 'numeric', 'BC do ICMS total ST', 'não', NULL, 'Grupo W. Total da NF-e', 'fatonfe');
 INSERT INTO app.label VALUES (72, 'infnfe_total_icmstot_vst', 'numeric', 'Valor Total do ICMS ST', 'não', NULL, 'Grupo W. Total da NF-e', 'fatonfe');
 INSERT INTO app.label VALUES (73, 'infnfe_total_icmstot_vfcpst', 'numeric', 'Valor Total do FCP (Fundo de Combate à Pobreza) retido por substituição tributária', 'não', NULL, 'Grupo W. Total da NF-e', 'fatonfe');
-INSERT INTO app.label VALUES (119, 'infnfe_det_prod_voutro', 'numeric', 'Outras despesas acessórias', 'não', NULL, 'Grupo I. Produtos e Serviços da NF-e', 'fatoitemnfe');
 INSERT INTO app.label VALUES (74, 'infnfe_total_icmstot_vfcpstret', 'numeric', 'Valor Total do FCP (Fundo de Combate à Pobreza) retido anteriormente por substituição tributária', 'não', NULL, 'Grupo W. Total da NF-e', 'fatonfe');
 INSERT INTO app.label VALUES (75, 'infnfe_total_icmstot_vprod', 'numeric', 'Valor Total dos produtos e serviços - ICMS Total', 'não', NULL, 'Grupo W. Total da NF-e', 'fatonfe');
 INSERT INTO app.label VALUES (76, 'infnfe_total_icmstot_vfrete', 'numeric', 'Valor Total do Frete - ICMS Total', 'não', NULL, 'Grupo W. Total da NF-e', 'fatonfe');
@@ -131,7 +130,7 @@ INSERT INTO app.label VALUES (96, 'informix_dhconexao', 'character varying', 'Da
 INSERT INTO app.label VALUES (97, 'informix_nriptransmissor', 'character varying', 'IP da conexão de envio da Nota Fiscal Eletrônica', 'sim', NULL, 'Informações do Informix', 'fatonfe');
 INSERT INTO app.label VALUES (98, 'informix_nrportacon', 'integer', 'Porta da conexão de envio da Nota Fiscal Eletrônica', 'não', NULL, 'Informações do Informix', 'fatonfe');
 INSERT INTO app.label VALUES (99, 'id_fatoitemnfe', 'bigserial', 'Índice de fatoitemnfe', 'não', NULL, NULL, 'fatoitemnfe');
-INSERT INTO app.label VALUES (100, 'infprot_chnfe', 'character varying', 'Chaves de acesso da NF-e', 'sim', 'compostas por: UF do emitente, AAMM da emissão da NFe, CNPJ do emitente, modelo, série e número da NF-e e código numérico+DV', NULL, 'fatoitemnfe');
+INSERT INTO app.label VALUES (100, 'infprot_chnfe', 'char(44)', 'Chaves de acesso do item da NF-e', 'sim', 'compostas por: UF do emitente, AAMM da emissão da NFe, CNPJ do emitente, modelo, série e número da NF-e e código numérico+DV', NULL, 'fatoitemnfe');
 INSERT INTO app.label VALUES (101, 'infnfe_det_nitem', 'character varying', 'Dados dos detalhes da NF-e', 'não', NULL, 'Grupo I. Produtos e Serviços da NF-e', 'fatoitemnfe');
 INSERT INTO app.label VALUES (102, 'infnfe_det_prod_cprod', 'character varying', 'Código do produto ou serviço', 'não', 'Preencher com CFOP caso se trate de itens não relacionados com mercadorias/produto e que o contribuinte não possua codificação própriaFormato ”CFOP9999”', 'Grupo I. Produtos e Serviços da NF-e', 'fatoitemnfe');
 INSERT INTO app.label VALUES (103, 'infnfe_det_prod_cean', 'character varying', 'GTIN (Global Trade Item Number) do produto', 'não', 'Antigo código EAN ou código de barras', 'Grupo I. Produtos e Serviços da NF-e', 'fatoitemnfe');
@@ -150,6 +149,7 @@ INSERT INTO app.label VALUES (115, 'infnfe_det_prod_vuntrib', 'numeric', 'Valor 
 INSERT INTO app.label VALUES (116, 'infnfe_det_prod_vfrete', 'numeric', 'Valor Total do Frete', 'não', NULL, 'Grupo I. Produtos e Serviços da NF-e', 'fatoitemnfe');
 INSERT INTO app.label VALUES (117, 'infnfe_det_prod_vseg', 'numeric', 'Valor Total do Seguro', 'não', NULL, 'Grupo I. Produtos e Serviços da NF-e', 'fatoitemnfe');
 INSERT INTO app.label VALUES (118, 'infnfe_det_prod_vdesc', 'numeric', 'Valor do Desconto', 'não', NULL, 'Grupo I. Produtos e Serviços da NF-e', 'fatoitemnfe');
+INSERT INTO app.label VALUES (119, 'infnfe_det_prod_voutro', 'numeric', 'Outras despesas acessórias', 'não', NULL, 'Grupo I. Produtos e Serviços da NF-e', 'fatoitemnfe');
 INSERT INTO app.label VALUES (120, 'infnfe_det_imposto_icms_ufst', 'character varying', 'Sigla da UF para qual é devido a partilha do ICMS ST da operação', 'não', NULL, 'Grupo N. ICMS Normal e ST', 'fatoitemnfe');
 INSERT INTO app.label VALUES (121, 'infnfe_det_prod_indtot', 'character varying', 'Indica se o valor da item (vProd) entra no valor total da NFe (vProd)', 'não', '0 – o valor do item (vProd) não compõe o valor total da NF-e (vProd), 1 – o valor do item (vProd) compõe o valor total da NF-e (vProd)', 'Grupo I. Produtos e Serviços da NF-e', 'fatoitemnfe');
 INSERT INTO app.label VALUES (122, 'infnfe_det_imposto_vtottrib', 'numeric', 'Valor estimado total de impostos federais, estaduais e municipais', 'não', NULL, 'Grupo M. Tributos incidentes no Produto ou Serviço', 'fatoitemnfe');
@@ -215,7 +215,7 @@ INSERT INTO app.label VALUES (179, 'infnfe_det_imposto_icmsufdest_vicmsufremet',
 
 CREATE TABLE app.fatonfe(
 	id_fatonfe BIGSERIAL NOT NULL,
-	infProt_chNFe character varying(44) PRIMARY KEY,
+	infProt_chNFe char(44) PRIMARY KEY,
  	infNFe_ide character varying,
 	infNFe_ide_cUF integer,
 	infNFe_ide_cNF character varying,
@@ -323,7 +323,7 @@ CREATE INDEX fatonfe_infnfe_dest_cnpj_idx ON app.fatonfe USING btree (infnfe_des
 
 CREATE TABLE app.fatoitemnfe(
 	id_fatoitemnfe BIGSERIAL NOT NULL,
-	infProt_chNFe character varying(44) NOT NULL,
+	infProt_chNFe char(44) NOT NULL,
 	infNFe_det_nItem character varying NOT NULL,
 	infNFe_det_prod_cProd character varying,
 	infNFe_det_prod_cEAN character varying,
