@@ -17,6 +17,7 @@ CREATE VIEW app.latest_dfe_dhemi_view AS
 			(SELECT MAX("eventomdfe_infevento_dhevento") as eventomdfe FROM app.fatoeventomdfe) as dheventomdfe
 			NATURAL FULL OUTER JOIN
 			(SELECT MAX("eventocte_infevento_dhevento") as eventocte FROM app.fatoeventocte) as dheventocte
-
+			NATURAL FULL OUTER JOIN
+	 		(SELECT CURRENT_DATE as dsync) as datesync
 		) as temp;
 
