@@ -1133,7 +1133,7 @@ CREATE TABLE app.fatoevento(
     evento_infevento_nrvelocidade int,                                      -- Velocidade do veículo
     evento_infevento_nrkmrodovia int,                                       -- Quilometragem da rodovia no local do evento
     evento_infevento_sguf character varying(2),                             -- UF em que o evento aconteceu
-    evento_infevento_tpsentido character varying(40),                       -- Sentido da rodovia onde o evento aconteceu
+    evento_infevento_tpsentido character varying(65),                       -- Sentido da rodovia onde o evento aconteceu
     evento_infevento_tpvia char
 );
 
