@@ -1087,6 +1087,7 @@ CREATE TABLE app.fatoeventocte(
 	eventoCTe_infEvento_detEvento_evCTeSubcontratacao_dhRecbto timestamp with time zone,
 	eventoCTe_infEvento_detEvento_evCTeSubcontratacao_nProt character varying(20),
 	eventoCTe_infEvento_detEvento_evCTeSubstituido_descEvento character varying(255),
+	-- The next column name is being abreviated to eventoCTe_infEvento_detEvento_evCTeSubstituido_chCTeSubstituica due to the max column name size
 	eventoCTe_infEvento_detEvento_evCTeSubstituido_chCTeSubstituicao character varying(44),
 	eventoCTe_infEvento_detEvento_evCTeSubstituido_dhRecbto timestamp with time zone,
 	eventoCTe_infEvento_detEvento_evCTeSubstituido_nProt character varying(20),
