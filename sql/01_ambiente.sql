@@ -1145,6 +1145,7 @@ CREATE TABLE app.fatocamera(
     name character varying(80),
     description character varying(256),
     status boolean,
+	municipio character varying(60),
     nrlatitude float,                    -- Latitude da câmera
     nrlongitude float                    -- Longitude da câmera
 );
