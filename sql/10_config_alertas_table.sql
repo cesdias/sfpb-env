@@ -7,6 +7,7 @@ CREATE TABLE app.config_alertas(
       configuracao JSON,
       nome TEXT,
       descricao TEXT,
+      group_id TEXT,
       procedimentos TEXT
 );
 
