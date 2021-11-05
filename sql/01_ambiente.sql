@@ -210,12 +210,14 @@ INSERT INTO app.label VALUES (176, 'infnfe_det_imposto_icmsufdest_picmsinterpart
 INSERT INTO app.label VALUES (177, 'infnfe_det_imposto_icmsufdest_vfcpufdest', 'numeric', 'Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP) da UF de destino', 'não', NULL, 'Grupo NA. ICMS para a UF de destino', 'fatoitemnfe');
 INSERT INTO app.label VALUES (178, 'infnfe_det_imposto_icmsufdest_vicmsufdest', 'numeric', 'Valor do ICMS de partilha para a UF do destinatário', 'não', NULL, 'Grupo NA. ICMS para a UF de destino', 'fatoitemnfe');
 INSERT INTO app.label VALUES (179, 'infnfe_det_imposto_icmsufdest_vicmsufremet', 'numeric', 'Valor do ICMS de partilha para a UF do remetente', 'não', 'Nota: A partir de 2019, este valor será zero.', 'Grupo NA. ICMS para a UF de destino', 'fatoitemnfe');
+INSERT INTO app.label VALUES (180, 'infnfe_sqn', 'bigint', 'Sequencial Number da nfe', 'não', NULL, NULL, 'fatonfe');
 
 
 
 CREATE TABLE app.fatonfe(
 	id_fatonfe BIGSERIAL NOT NULL,
 	infProt_chNFe char(44) PRIMARY KEY,
+	infNFe_sqn bigint NOT NULL,
  	infNFe_ide character varying,
 	infNFe_ide_cUF integer,
 	infNFe_ide_cNF character varying,
