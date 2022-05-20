@@ -131,10 +131,10 @@ INSERT INTO app.label VALUES (92, 'infnfe_transp_vagao', 'character varying(20)'
 INSERT INTO app.label VALUES (93, 'infnfe_transp_balsa', 'character varying(20)', 'Identificação da balsa (v2.0)', 'não', NULL, 'Dados dos transportes da NF-e', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (94, 'infnfe_transp_transporta_cnpj', 'char(14)', 'CNPJ do transportador', 'não', NULL, 'Dados do transportador', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (95, 'infnfe_transp_transporta_cpf', 'char(11)', 'CPF do transportador', 'não', NULL, 'Dados do transportador', 'fatonfe', NULL);
-INSERT INTO app.label VALUES (96, 'infnfe_transp_transporta_xnome', 'character varying(60)', 'Razão Social ou nome do transportador', 'não', NULL, 'Dados do transportador', 'fatonfe', NULL);
+INSERT INTO app.label VALUES (96, 'infnfe_transp_transporta_xnome', 'character varying(100)', 'Razão Social ou nome do transportador', 'não', NULL, 'Dados do transportador', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (97, 'infnfe_transp_transporta_ie', 'character varying', 'Inscrição Estadual (v2.0)', 'não', NULL, 'Dados do transportador', 'fatonfe', NULL);
-INSERT INTO app.label VALUES (98, 'infnfe_transp_transporta_xender', 'character varying(60)', 'Endereço completo', 'não', NULL, 'Dados do transportador', 'fatonfe', NULL);
-INSERT INTO app.label VALUES (99, 'infnfe_transp_transporta_xmun', 'character varying(60)', 'Nome do munícipio', 'não', NULL, 'Dados do transportador', 'fatonfe', NULL);
+INSERT INTO app.label VALUES (98, 'infnfe_transp_transporta_xender', 'character varying(100)', 'Endereço completo', 'não', NULL, 'Dados do transportador', 'fatonfe', NULL);
+INSERT INTO app.label VALUES (99, 'infnfe_transp_transporta_xmun', 'character varying(100)', 'Nome do munícipio', 'não', NULL, 'Dados do transportador', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (100, 'infnfe_transp_transporta_uf', 'character varying(2)', 'Sigla da UF', 'não', NULL, 'Dados do transportador', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (101, 'infnfe_transp_rettransp_vserv', 'numeric(16,2)', 'Valor do Serviço', 'não', NULL, 'Dados da retenção ICMS do Transporte', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (102, 'infnfe_transp_rettransp_vbcret', 'numeric(16,2)', 'BC da Retenção do ICMS', 'não', NULL, 'Dados da retenção ICMS do Transporte', 'fatonfe', NULL);
@@ -142,17 +142,17 @@ INSERT INTO app.label VALUES (103, 'infnfe_transp_rettransp_picmsret', 'numeric(
 INSERT INTO app.label VALUES (104, 'infnfe_transp_rettransp_vicmsret', 'numeric(16,2)', 'Valor do ICMS Retido', 'não', NULL, 'Dados da retenção ICMS do Transporte', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (105, 'infnfe_transp_rettransp_cfop', 'character varying', 'Código Fiscal de Operações e Prestações', 'não', NULL, 'Dados da retenção ICMS do Transporte', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (106, 'infnfe_transp_rettransp_cmunfg', 'character varying', 'Código do Município de Ocorrência do Fato Gerador (utilizar a tabela do IBGE)', 'não', NULL, 'Dados da retenção ICMS do Transporte', 'fatonfe', NULL);
-INSERT INTO app.label VALUES (107, 'infnfe_transp_veictransp_placa', 'character varying(7)', 'Placa do veículo', 'não', NULL, 'Dados do veículo', 'fatonfe', 'btree');
+INSERT INTO app.label VALUES (107, 'infnfe_transp_veictransp_placa', 'character varying(8)', 'Placa do veículo', 'não', NULL, 'Dados do veículo', 'fatonfe', 'btree');
 INSERT INTO app.label VALUES (108, 'infnfe_transp_veictransp_uf', 'character varying(2)', 'Sigla da UF', 'não', NULL, 'Dados do veículo', 'fatonfe', NULL);
-INSERT INTO app.label VALUES (109, 'infnfe_transp_reboque1_placa', 'character varying(7)', 'Placa do veículo', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
+INSERT INTO app.label VALUES (109, 'infnfe_transp_reboque1_placa', 'character varying(8)', 'Placa do veículo', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (110, 'infnfe_transp_reboque1_uf', 'character varying(2)', 'Sigla da UF', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
-INSERT INTO app.label VALUES (111, 'infnfe_transp_reboque2_placa', 'character varying(7)', 'Placa do veículo', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
+INSERT INTO app.label VALUES (111, 'infnfe_transp_reboque2_placa', 'character varying(8)', 'Placa do veículo', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (112, 'infnfe_transp_reboque2_uf', 'character varying(2)', 'Sigla da UF', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
-INSERT INTO app.label VALUES (113, 'infnfe_transp_reboque3_placa', 'character varying(7)', 'Placa do veículo', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
+INSERT INTO app.label VALUES (113, 'infnfe_transp_reboque3_placa', 'character varying(8)', 'Placa do veículo', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (114, 'infnfe_transp_reboque3_uf', 'character varying(2)', 'Sigla da UF', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
-INSERT INTO app.label VALUES (115, 'infnfe_transp_reboque4_placa', 'character varying(7)', 'Placa do veículo', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
+INSERT INTO app.label VALUES (115, 'infnfe_transp_reboque4_placa', 'character varying(8)', 'Placa do veículo', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (116, 'infnfe_transp_reboque4_uf', 'character varying(2)', 'Sigla da UF', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
-INSERT INTO app.label VALUES (117, 'infnfe_transp_reboque5_placa', 'character varying(7)', 'Placa do veículo', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
+INSERT INTO app.label VALUES (117, 'infnfe_transp_reboque5_placa', 'character varying(8)', 'Placa do veículo', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (118, 'infnfe_transp_reboque5_uf', 'character varying(2)', 'Sigla da UF', 'não', NULL, 'Dados do reboque/Dolly (v2.0)', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (119, 'infnfe_transp_vol1_nVol', 'character varying(60)', 'Numeração dos volumes transportados', 'não', NULL, 'Dados dos volumes', 'fatonfe', NULL);
 INSERT INTO app.label VALUES (120, 'infnfe_transp_vol1_qVol', 'numeric(16,2)', 'Quantidade de volumes transportados', 'não', NULL, 'Dados dos volumes', 'fatonfe', NULL);
@@ -377,10 +377,10 @@ CREATE TABLE app.fatonfe(
 	infNFe_transp_balsa character varying(20),
 	infNFe_transp_transporta_cnpj char(14),
 	infNFe_transp_transporta_cpf char(11),
-	infNFe_transp_transporta_xnome character varying(60),
+	infNFe_transp_transporta_xnome character varying(100),
 	infNFe_transp_transporta_ie character varying,
-	infNFe_transp_transporta_xender character varying(60),
-	infNFe_transp_transporta_xmun character varying(60),
+	infNFe_transp_transporta_xender character varying(100),
+	infNFe_transp_transporta_xmun character varying(100),
 	infNFe_transp_transporta_uf character varying(2),
 	infNFe_transp_rettransp_vserv numeric(16,2),
 	infNFe_transp_rettransp_vbcret numeric(16,2),
@@ -388,17 +388,17 @@ CREATE TABLE app.fatonfe(
 	infNFe_transp_rettransp_vicmsret numeric(16,2),
 	infNFe_transp_rettransp_cfop character varying,
 	infNFe_transp_rettransp_cmunfg character varying,
-	infNFe_transp_veictransp_placa character varying(7),
+	infNFe_transp_veictransp_placa character varying(8),
 	infNFe_transp_veictransp_uf character varying(2),
-	infNFe_transp_reboque1_placa character varying(7),
+	infNFe_transp_reboque1_placa character varying(8),
 	infNFe_transp_reboque1_uf character varying(2),
-	infNFe_transp_reboque2_placa character varying(7),
+	infNFe_transp_reboque2_placa character varying(8),
 	infNFe_transp_reboque2_uf character varying(2),
-	infNFe_transp_reboque3_placa character varying(7),
+	infNFe_transp_reboque3_placa character varying(8),
 	infNFe_transp_reboque3_uf character varying(2),
-	infNFe_transp_reboque4_placa character varying(7),
+	infNFe_transp_reboque4_placa character varying(8),
 	infNFe_transp_reboque4_uf character varying(2),
-	infNFe_transp_reboque5_placa character varying(7),
+	infNFe_transp_reboque5_placa character varying(8),
 	infNFe_transp_reboque5_uf character varying(2),
 	infNFe_transp_vol1_nVol character varying(60),
 	infNFe_transp_vol1_qVol numeric(16,2),
