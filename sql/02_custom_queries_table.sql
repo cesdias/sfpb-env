@@ -7,5 +7,5 @@ CREATE TABLE app.custom_queries(
     user_id varchar,
     custom_query JSON,
     query_date timestamp,
-    query_order int
+    query_order int4
 );

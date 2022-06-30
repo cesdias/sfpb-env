@@ -9,12 +9,19 @@ CREATE TABLE app.config_alertas(
       descricao TEXT,
       group_id TEXT,
       procedimentos TEXT
+      data_criacao timestamp NULL,
+	data_fechamento timestamp NULL,
+	criador text NULL,
 );
 
 -- Cria nova tabela de notificações
 CREATE TABLE app.notificacoes(
-      id_evento INTEGER,
-      id_config INTEGER
+      id BIGSERIAL PRIMARY KEY,
+      id_evento int4,
+      id_config int4,
+      acao_realizada varchar,
+      data_hora timestamp,
+      fiscal_responsavel varchar
 );
 
 GRANT USAGE ON SCHEMA app TO hasurauser;
