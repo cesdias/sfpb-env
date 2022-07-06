@@ -121,11 +121,11 @@ echo -e "⚙️  Restoring hasura metadata..."
 RES=`curl -sSL -d @<(cat <<EOF
 {
     "type": "replace_metadata",
-    "args": $(cat hasura/hasura_metadata_2022_07_05_21_12_48_647.json)
+    "args": $(cat hasura/hasura_metadata_2022_07_06_14_38_37_394.json)    
 }
 EOF
 ) -H "X-Hasura-Admin-Secret: $X_HASURA_ADMIN_SECRET" http://localhost:8080/v1/query`
-echo -e $RES |grep success
+echo -e $RES |grep "\"is_consistent\":true,\"inconsistent_objects\":\[\]"
 if [ "$?" -ne 0 ]; then
     echo -e ""
     echo -e "${RED}Error restoring Hasura metadata. Check your metadata file and/or the X_HASURA_ADMIN_SECRET value and run $0 again.${NC} ❌"

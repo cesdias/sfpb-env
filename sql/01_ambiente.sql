@@ -994,9 +994,9 @@ CREATE TABLE app.fatomdfe(
 	infMDFe_ide_verProc character varying(20),
 	infMDFe_ide_UFIni character varying(2),
 	infMDFe_ide_UFFim character varying(2),
-	infMDFe_ide_infMunCarrega_cMunCarrega character varying(7),
+	/*infMDFe_ide_infMunCarrega_cMunCarrega character varying(7),
 	infMDFe_ide_infMunCarrega_xMunCarrega character varying(60),
-	infMDFe_ide_infPerCurso_UFPer character varying(2),
+	infMDFe_ide_infPerCurso_UFPer character varying(2),*/
 	infMDFe_ide_dhIniViagem timestamp with time zone,
 	infMDFe_ide_indCanalVerde char(1),
 	infMDFe_ide_indCarregaPosterior char(1),
@@ -1184,6 +1184,27 @@ CREATE TABLE app.fatodocmdfe (
 
 CREATE INDEX protmdfe_infprot_chmdfe_idx ON app.fatodocmdfe USING btree (protmdfe_infprot_chmdfe);
 
+
+-- Tabela listando municípios de carregamento de uma MDFe
+CREATE TABLE app.fatomuncarregamdfe(
+    id serial PRIMARY KEY,
+    
+    protmdfe_infprot_chmdfe character varying(44),
+	    
+    infmdfe_ide_infmuncarrega_cMunCarrega character varying(7),
+    infmdfe_ide_infmuncarrega_xMunCarrega character varying(60)	
+);
+
+CREATE INDEX protmdfe_infprot_chmdfe_idx2 ON app.fatomuncarregamdfe USING btree (protmdfe_infprot_chmdfe);
+
+-- Tabela descrevendo o percurso de uma mdfe (exclui partida e chegada)
+CREATE TABLE app.fatopercursomdfe(
+    id serial PRIMARY KEY,
+    protmdfe_infprot_chmdfe character varying(44),
+    infmdfe_ide_infPercurso_UFPer character(2)
+);
+
+CREATE INDEX protmdfe_infprot_chmdfe_idx3 ON app.fatopercursomdfe USING btree (protmdfe_infprot_chmdfe);
 
 --
 -- Table fatoeventocte
