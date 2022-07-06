@@ -8,10 +8,10 @@ CREATE TABLE app.config_alertas(
       nome TEXT,
       descricao TEXT,
       group_id TEXT,
-      procedimentos TEXT
+      procedimentos TEXT,
       data_criacao timestamp NULL,
 	data_fechamento timestamp NULL,
-	criador text NULL,
+	criador text NULL
 );
 
 -- Cria nova tabela de notificações
