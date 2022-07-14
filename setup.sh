@@ -121,7 +121,7 @@ echo -e "⚙️  Restoring hasura metadata..."
 RES=`curl -sSL -d @<(cat <<EOF
 {
     "type": "replace_metadata",
-    "args": $(cat hasura/hasura_metadata_2022_07_06_14_38_37_394.json)    
+    "args": $(cat hasura/hasura_metadata_2022_07_14_16_44_00_000.json)    
 }
 EOF
 ) -H "X-Hasura-Admin-Secret: $X_HASURA_ADMIN_SECRET" http://localhost:8080/v1/query`
