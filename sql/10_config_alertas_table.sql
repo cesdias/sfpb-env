@@ -14,6 +14,20 @@ CREATE TABLE app.config_alertas(
 	criador text NULL
 );
 
+CREATE or REPLACE FUNCTION noneTextToNull(text) RETURNS text
+AS $$
+DECLARE
+ aux text := lower($1);
+BEGIN
+ IF aux = 'none' THEN
+   RETURN null;
+ ELSE 
+   RETURN $1;
+ END if;
+END;
+$$
+LANGUAGE plpgsql;
+
 CREATE OR REPLACE VIEW app.config_alertas_view
 AS SELECT config_alertas.id_config,
     config_alertas.nome,
