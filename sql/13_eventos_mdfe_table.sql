@@ -8,3 +8,6 @@ CREATE TABLE app.eventos_mdfe (
 );
 CREATE INDEX eventos_mdfe_chave_mdfe_idx ON app.eventos_mdfe USING btree (chave_mdfe);
 CREATE INDEX eventos_mdfe_id_evento_idx ON app.eventos_mdfe USING btree (id_evento);
+
+GRANT ALL ON TABLE app.eventos_mdfe TO postgres;
+GRANT ALL ON TABLE app.eventos_mdfe TO hasurauser;

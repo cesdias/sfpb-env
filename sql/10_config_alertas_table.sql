@@ -14,6 +14,29 @@ CREATE TABLE app.config_alertas(
 	criador text NULL
 );
 
+CREATE OR REPLACE VIEW app.config_alertas_view
+AS SELECT config_alertas.id_config,
+    config_alertas.nome,
+    config_alertas.descricao,
+    config_alertas.group_id,
+    config_alertas.procedimentos,
+    config_alertas.data_criacao,
+    config_alertas.data_fechamento,
+    config_alertas.criador,
+    nonetexttonull(config_alertas.configuracao ->> 'placa'::text) AS placa,
+    nonetexttonull(config_alertas.configuracao ->> 'valor'::text)::double precision AS valor,
+    nonetexttonull(config_alertas.configuracao ->> 'cpf_proprietario'::text) AS cpf_proprietario,
+    nonetexttonull(config_alertas.configuracao ->> 'cpf_condutor'::text) AS cpf_condutor,
+    nonetexttonull(config_alertas.configuracao ->> 'cpf_emitente'::text) AS cpf_emitente,
+    nonetexttonull(config_alertas.configuracao ->> 'cpf_destinatario'::text) AS cpf_destinatario,
+    nonetexttonull(config_alertas.configuracao ->> 'cnpj_proprietario'::text) AS cnpj_proprietario,
+    nonetexttonull(config_alertas.configuracao ->> 'cnpj_emitente'::text) AS cnpj_emitente,
+    nonetexttonull(config_alertas.configuracao ->> 'cnpj_destinatario'::text) AS cnpj_destinatario
+   FROM config_alertas;
+
+GRANT ALL ON TABLE app.config_alertas_view TO hasurauser; 
+GRANT ALL ON TABLE app.config_alertas_view TO postgres;
+
 -- Cria nova tabela de notificações
 CREATE TABLE app.notificacoes(
       id BIGSERIAL PRIMARY KEY,

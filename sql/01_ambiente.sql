@@ -559,7 +559,7 @@ CREATE INDEX infnfe_det_imposto_icms_vicmsst_idx ON app.fatoitemnfe USING btree 
 
 CREATE TABLE app.fatorefnfe(
 	id_fatorefnfe bigserial NOT NULL,
-	infprot_chnfe char(44),
+	infprot_chnfe char(44) NOT NULL,
 	infnfe_ide_nfref_refnfe char(44),
 	infnfe_ide_nfref_refcte char(44),
 	infnfe_ide_nfref_refnfp_cuf character varying,
@@ -1166,7 +1166,6 @@ CREATE TABLE app.fatoeventomdfe(
 
 -- Tabela para documentos da tag infDocMDFe
 CREATE TABLE app.fatodocmdfe (
-	id serial primary key,
 	protmdfe_infprot_chmdfe varchar(44) NOT NULL,
 	infmdfe_infdoc_infmundescarga_cmundescarga varchar(7) NULL,
 	infmdfe_infdoc_infmundescarga_xmundescarga varchar(60) NULL,
@@ -1184,6 +1183,7 @@ CREATE TABLE app.fatodocmdfe (
 
 CREATE INDEX protmdfe_infprot_chmdfe_idx ON app.fatodocmdfe USING btree (protmdfe_infprot_chmdfe);
 
+GRANT ALL ON TABLE app.fatodocmdfe TO postgres;
 
 -- Tabela listando municípios de carregamento de uma MDFe
 CREATE TABLE app.fatomuncarregamdfe(
