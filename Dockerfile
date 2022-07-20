@@ -11,6 +11,8 @@ COPY ./sql/08_async_reports_table.sql /docker-entrypoint-initdb.d
 COPY ./sql/09_dhemi_view.sql /docker-entrypoint-initdb.d
 COPY ./sql/10_config_alertas_table.sql /docker-entrypoint-initdb.d
 COPY ./sql/11_user_group_tables.sql /docker-entrypoint-initdb.d
+COPY ./sql/12_ausentes_table.sql /docker-entrypoint-initdb.d
+COPY ./sql/13_eventos_mdfe_table.sql /docker-entrypoint-initdb.d
 COPY ./sql/99_update_permissions.sql /docker-entrypoint-initdb.d
 COPY ./data/app_efd-2020_09_17.sql /docker-entrypoint-initdb.d
 COPY ./data/app_fatonfe-2020_09_17.sql /docker-entrypoint-initdb.d

@@ -14,7 +14,7 @@ CREATE TABLE app.config_alertas(
 	criador text NULL
 );
 
-CREATE or REPLACE FUNCTION noneTextToNull(text) RETURNS text
+CREATE or REPLACE FUNCTION app.noneTextToNull(text) RETURNS text
 AS $$
 DECLARE
  aux text := lower($1);
@@ -28,6 +28,8 @@ END;
 $$
 LANGUAGE plpgsql;
 
+-- app.config_alertas_view source
+
 CREATE OR REPLACE VIEW app.config_alertas_view
 AS SELECT config_alertas.id_config,
     config_alertas.nome,
@@ -37,17 +39,19 @@ AS SELECT config_alertas.id_config,
     config_alertas.data_criacao,
     config_alertas.data_fechamento,
     config_alertas.criador,
-    nonetexttonull(config_alertas.configuracao ->> 'placa'::text) AS placa,
-    nonetexttonull(config_alertas.configuracao ->> 'valor'::text)::double precision AS valor,
-    nonetexttonull(config_alertas.configuracao ->> 'cpf_proprietario'::text) AS cpf_proprietario,
-    nonetexttonull(config_alertas.configuracao ->> 'cpf_condutor'::text) AS cpf_condutor,
-    nonetexttonull(config_alertas.configuracao ->> 'cpf_emitente'::text) AS cpf_emitente,
-    nonetexttonull(config_alertas.configuracao ->> 'cpf_destinatario'::text) AS cpf_destinatario,
-    nonetexttonull(config_alertas.configuracao ->> 'cnpj_proprietario'::text) AS cnpj_proprietario,
-    nonetexttonull(config_alertas.configuracao ->> 'cnpj_emitente'::text) AS cnpj_emitente,
-    nonetexttonull(config_alertas.configuracao ->> 'cnpj_destinatario'::text) AS cnpj_destinatario
+    app.nonetexttonull(config_alertas.configuracao ->> 'placa'::text) AS placa,
+    app.nonetexttonull(config_alertas.configuracao ->> 'valor'::text)::double precision AS valor,
+    app.nonetexttonull(config_alertas.configuracao ->> 'cpf_proprietario'::text) AS cpf_proprietario,
+    app.nonetexttonull(config_alertas.configuracao ->> 'cpf_condutor'::text) AS cpf_condutor,
+    app.nonetexttonull(config_alertas.configuracao ->> 'cpf_emitente'::text) AS cpf_emitente,
+    app.nonetexttonull(config_alertas.configuracao ->> 'cpf_destinatario'::text) AS cpf_destinatario,
+    app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_proprietario'::text) AS cnpj_proprietario,
+    app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_emitente'::text) AS cnpj_emitente,
+    app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_destinatario'::text) AS cnpj_destinatario,
+    app.nonetexttonull(config_alertas.configuracao ->> 'cpf_emitente_nfe'::text) AS cpf_emitente_nfe,
+    app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_emitente_nfe'::text) AS cnpj_emitente_nfe
    FROM config_alertas;
-
+   
 GRANT ALL ON TABLE app.config_alertas_view TO hasurauser; 
 GRANT ALL ON TABLE app.config_alertas_view TO postgres;
 
