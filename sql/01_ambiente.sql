@@ -557,6 +557,29 @@ CREATE INDEX infnfe_det_imposto_icms_vicms_idx ON app.fatoitemnfe USING btree (i
 CREATE INDEX infnfe_det_imposto_icms_vbcst_idx ON app.fatoitemnfe USING btree (infnfe_det_imposto_icms_vbcst);
 CREATE INDEX infnfe_det_imposto_icms_vicmsst_idx ON app.fatoitemnfe USING btree (infnfe_det_imposto_icms_vicmsst);
 
+CREATE TABLE app.fatonfetransito (
+	id_fatonfe bigserial NOT NULL,
+	infnfe_sqn int8 NOT NULL,
+	infprot_chnfe bpchar(44) NOT NULL,
+	infnfe_ide varchar NULL,
+	infnfe_ide_mod int4 NULL,
+	infnfe_ide_dhemi timestamptz NULL,
+	infnfe_ide_dhsaient timestamptz NULL,
+	infnfe_emit_cnpj bpchar(14) NULL,
+	infnfe_emit_cpf bpchar(11) NULL,
+	infnfe_dest_cnpj bpchar(14) NULL,
+	infnfe_dest_cpf bpchar(14) NULL,
+	CONSTRAINT fatonfetransito_pkey PRIMARY KEY (infprot_chnfe)
+);
+CREATE INDEX fatonfetransito_id_idx ON app.fatonfetransito USING btree (id_fatonfe);
+CREATE INDEX fatonfetransito_infnfe_dest_cnpj_idx ON app.fatonfetransito USING btree (infnfe_dest_cnpj);
+CREATE INDEX fatonfetransito_infnfe_dest_cpf_idx ON app.fatonfetransito USING btree (infnfe_dest_cpf);
+CREATE INDEX fatonfetransito_infnfe_emit_cnpj_idx ON app.fatonfetransito USING btree (infnfe_emit_cnpj);
+CREATE INDEX fatonfetransito_infnfe_emit_cpf_idx ON app.fatonfetransito USING btree (infnfe_emit_cpf);
+CREATE INDEX fatonfetransito_infnfe_ide_dhemi ON app.fatonfetransito USING btree (infnfe_ide_dhemi);
+CREATE INDEX fatonfetransito_infnfe_ide_mod_idx ON app.fatonfetransito USING btree (infnfe_ide_mod);
+CREATE INDEX fatonfetransito_infnfe_sqn_idx ON app.fatonfetransito USING btree (infnfe_sqn);
+
 CREATE TABLE app.fatorefnfe(
 	id_fatorefnfe bigserial NOT NULL,
 	infprot_chnfe char(44) NOT NULL,
@@ -1340,6 +1363,14 @@ CREATE TABLE app.fatoevento(
     evento_infevento_tpvia char,
 	evento_valor_tot_cmdfe float8											-- TODO: Identificar porpósito do campo
 );
+
+CREATE INDEX evento_infevento_dhregpassagem_idx ON app.fatoevento USING btree (evento_infevento_dhregpassagem);
+CREATE INDEX evento_infevento_dhregpassagem_DESC_idx ON app.fatoevento (evento_infevento_dhregpassagem DESC NULLS LAST);
+
+																				
+
+
+
 
 -- Tabela fatocamera
 CREATE TABLE app.fatocamera(
