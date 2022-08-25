@@ -12,6 +12,35 @@ CREATE INDEX eventos_mdfe_id_evento_idx ON app.eventos_mdfe USING btree (id_even
 GRANT ALL ON TABLE app.eventos_mdfe TO postgres;
 GRANT ALL ON TABLE app.eventos_mdfe TO hasurauser;
 
+CREATE OR REPLACE VIEW app.evento_passagem_mdfe_view
+AS SELECT e.id,
+    e.evento_chdfe,
+    e.evento_tipo_dfe,
+    e.evento_infevento_dhregpassagem,
+    e.evento_infevento_dsreflocal,
+    e.evento_infevento_dstipoveiculo,
+    e.evento_infevento_nocor,
+    e.evento_infevento_nomarcamodelo,
+    e.evento_infevento_norodovia,
+    e.evento_infevento_nrlatitude,
+    e.evento_infevento_nrlongitude,
+    e.evento_infevento_nrplaca,
+    e.evento_infevento_nrvelocidade,
+    e.evento_infevento_nrkmrodovia,
+    e.evento_infevento_sguf,
+    e.evento_infevento_tpsentido,
+    e.evento_infevento_tpvia,
+    e.evento_valor_tot_cmdfe,
+    f.protmdfe_infprot_chmdfe,
+    f.infmdfe_ide_ufini,
+    f.infmdfe_ide_uffim
+   FROM app.fatoevento e
+     JOIN app.eventos_mdfe a ON e.id = a.id_evento
+     JOIN app.fatomdfe f ON f.protmdfe_infprot_chmdfe::text = a.chave_mdfe::text
+  ORDER BY e.evento_infevento_dhregpassagem DESC;
+
+GRANT ALL ON TABLE app.evento_passagem_mdfe_view TO postgres;
+GRANT ALL ON TABLE app.evento_passagem_mdfe_view TO hasurauser;
 
 CREATE OR REPLACE VIEW app.latest_notifications_dhregpassagem_view
 AS SELECT a.id,
