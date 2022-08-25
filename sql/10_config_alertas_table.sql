@@ -62,9 +62,9 @@ CREATE TABLE app.notificacoes(
       acao_realizada varchar,
       data_hora timestamp,
       fiscal_responsavel varchar,
-      notification_type smalint,
+      notification_type smallint,
       infprot_chnfe bpchar(44),
-      protMDFe_infProt_chMDFe character varying(44),
+      protMDFe_infProt_chMDFe character varying(44)
 );
 
 GRANT USAGE ON SCHEMA app TO hasurauser;
