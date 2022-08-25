@@ -1194,6 +1194,44 @@ CREATE TABLE app.fatoeventomdfe(
 	dhConexao timestamp with time zone
 );
 
+CREATE TABLE app.eventos_mdfe (
+	id_evento bigserial NOT NULL,
+	chave_mdfe varchar(44) NULL
+);
+CREATE INDEX eventos_mdfe_chave_mdfe_idx ON app.eventos_mdfe USING btree (chave_mdfe);
+CREATE INDEX eventos_mdfe_id_evento_idx ON app.eventos_mdfe USING btree (id_evento);
+
+GRANT ALL ON TABLE app.eventos_mdfe TO postgres;
+GRANT ALL ON TABLE app.eventos_mdfe TO hasurauser;
+
+
+CREATE OR REPLACE VIEW app.evento_passagem_mdfe_view
+AS SELECT e.id,
+    e.evento_chdfe,
+    e.evento_tipo_dfe,
+    e.evento_infevento_dhregpassagem,
+    e.evento_infevento_dsreflocal,
+    e.evento_infevento_dstipoveiculo,
+    e.evento_infevento_nocor,
+    e.evento_infevento_nomarcamodelo,
+    e.evento_infevento_norodovia,
+    e.evento_infevento_nrlatitude,
+    e.evento_infevento_nrlongitude,
+    e.evento_infevento_nrplaca,
+    e.evento_infevento_nrvelocidade,
+    e.evento_infevento_nrkmrodovia,
+    e.evento_infevento_sguf,
+    e.evento_infevento_tpsentido,
+    e.evento_infevento_tpvia,
+    e.evento_valor_tot_cmdfe,
+    f.protmdfe_infprot_chmdfe,
+    f.infmdfe_ide_ufini,
+    f.infmdfe_ide_uffim
+   FROM app.fatoevento e
+     JOIN app.eventos_mdfe a ON e.id = a.id_evento
+     JOIN app.fatomdfe f ON f.protmdfe_infprot_chmdfe::text = a.chave_mdfe::text
+  ORDER BY e.evento_infevento_dhregpassagem DESC;
+
 -- Tabela para documentos da tag infDocMDFe
 CREATE TABLE app.fatodocmdfe (
 	protmdfe_infprot_chmdfe varchar(44) NOT NULL,
@@ -1212,6 +1250,7 @@ CREATE TABLE app.fatodocmdfe (
 );
 
 CREATE INDEX protmdfe_infprot_chmdfe_idx ON app.fatodocmdfe USING btree (protmdfe_infprot_chmdfe);
+CREATE INDEX fatodocmdfe_nfe_idx ON app.fatodocmdfe USING btree (infmdfe_infdoc_infmundescarga_infnfe_chnfe);
 
 GRANT ALL ON TABLE app.fatodocmdfe TO postgres;
 
