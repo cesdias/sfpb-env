@@ -1368,7 +1368,7 @@ CREATE TABLE app.fatoevento(
     evento_infevento_nrkmrodovia int,                                       -- Quilometragem da rodovia no local do evento
     evento_infevento_sguf character varying(2),                             -- UF em que o evento aconteceu
     evento_infevento_tpsentido character varying(65),                       -- Sentido da rodovia onde o evento aconteceu
-    evento_infevento_tpvia char,
+    evento_infevento_tpvia varchar,
 	evento_valor_tot_cmdfe float8											-- TODO: Identificar porpósito do campo
 );
 
