@@ -569,6 +569,13 @@ CREATE TABLE app.fatonfetransito (
 	infnfe_emit_cpf bpchar(11) NULL,
 	infnfe_dest_cnpj bpchar(14) NULL,
 	infnfe_dest_cpf bpchar(14) NULL,
+	infNFe_transp_veictransp_placa character varying(8),
+	infNFe_transp_reboque1_placa character varying(8),
+	infNFe_transp_reboque2_placa character varying(8),
+	infNFe_transp_reboque3_placa character varying(8),
+	infNFe_transp_reboque4_placa character varying(8),
+	infNFe_transp_reboque5_placa character varying(8),
+	infNFe_total_ICMSTot_vNF numeric(16,2),
 	CONSTRAINT fatonfetransito_pkey PRIMARY KEY (infprot_chnfe)
 );
 CREATE INDEX fatonfetransito_id_idx ON app.fatonfetransito USING btree (id_fatonfe);

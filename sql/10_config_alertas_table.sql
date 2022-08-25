@@ -41,16 +41,15 @@ AS SELECT config_alertas.id_config,
     config_alertas.criador,
     app.nonetexttonull(config_alertas.configuracao ->> 'placa'::text) AS placa,
     app.nonetexttonull(config_alertas.configuracao ->> 'valor'::text)::double precision AS valor,
-    app.nonetexttonull(config_alertas.configuracao ->> 'cpf_proprietario'::text) AS cpf_proprietario,
+    app.nonetexttonull(config_alertas.configuracao ->> 'valor_nfe'::text)::double precision AS valor_nfe,
     app.nonetexttonull(config_alertas.configuracao ->> 'cpf_condutor'::text) AS cpf_condutor,
     app.nonetexttonull(config_alertas.configuracao ->> 'cpf_emitente'::text) AS cpf_emitente,
     app.nonetexttonull(config_alertas.configuracao ->> 'cpf_destinatario'::text) AS cpf_destinatario,
-    app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_proprietario'::text) AS cnpj_proprietario,
     app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_emitente'::text) AS cnpj_emitente,
     app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_destinatario'::text) AS cnpj_destinatario,
     app.nonetexttonull(config_alertas.configuracao ->> 'cpf_emitente_nfe'::text) AS cpf_emitente_nfe,
     app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_emitente_nfe'::text) AS cnpj_emitente_nfe
-   FROM config_alertas;
+   FROM app.config_alertas;
    
 GRANT ALL ON TABLE app.config_alertas_view TO hasurauser; 
 GRANT ALL ON TABLE app.config_alertas_view TO postgres;
@@ -62,7 +61,10 @@ CREATE TABLE app.notificacoes(
       id_config int4,
       acao_realizada varchar,
       data_hora timestamp,
-      fiscal_responsavel varchar
+      fiscal_responsavel varchar,
+      notification_type smalint,
+      infprot_chnfe bpchar(44),
+      protMDFe_infProt_chMDFe character varying(44),
 );
 
 GRANT USAGE ON SCHEMA app TO hasurauser;
