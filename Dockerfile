@@ -7,7 +7,7 @@ COPY ./sql/04_suggestion_table.sql /docker-entrypoint-initdb.d
 COPY ./sql/05_refresh_materialized_views.sql /docker-entrypoint-initdb.d
 COPY ./sql/06_async_downloads_table.sql /docker-entrypoint-initdb.d
 COPY ./sql/07_async_reports_table.sql /docker-entrypoint-initdb.d
-COPY ./sql/08_async_reports_table.sql /docker-entrypoint-initdb.d
+COPY ./sql/08_bug_reports_table.sql /docker-entrypoint-initdb.d
 COPY ./sql/09_dhemi_view.sql /docker-entrypoint-initdb.d
 COPY ./sql/10_config_alertas_table.sql /docker-entrypoint-initdb.d
 COPY ./sql/11_user_group_tables.sql /docker-entrypoint-initdb.d
