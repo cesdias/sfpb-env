@@ -91,6 +91,7 @@ AS SELECT a.id,
      JOIN app.fatoevento c ON a.id_evento = c.id
      JOIN app.eventos_mdfe d ON a.id_evento = d.id_evento
      JOIN app.fatomdfe e ON e.protmdfe_infprot_chmdfe::text = d.chave_mdfe::text
+  WHERE a.notification_type = 1
   ORDER BY c.evento_infevento_dhregpassagem DESC;
 
 GRANT ALL ON TABLE app.latest_notifications_dhregpassagem_view TO hasurauser; 

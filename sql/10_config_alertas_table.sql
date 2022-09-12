@@ -62,7 +62,7 @@ CREATE TABLE app.notificacoes(
       acao_realizada varchar,
       data_hora timestamp,
       fiscal_responsavel varchar,
-      notification_type smallint,
+      notification_type smallint DEFAULT 1,
       infprot_chnfe bpchar(44),
       protMDFe_infProt_chMDFe character varying(44)
 );
