@@ -89,8 +89,7 @@ AS SELECT a.id,
    FROM app.notificacoes a
      JOIN app.config_alertas b ON b.id_config = a.id_config
      JOIN app.fatoevento c ON a.id_evento = c.id
-     JOIN app.eventos_mdfe d ON a.id_evento = d.id_evento
-     JOIN app.fatomdfe e ON e.protmdfe_infprot_chmdfe::text = d.chave_mdfe::text
+     JOIN app.fatomdfe e ON e.protmdfe_infprot_chmdfe = a.protmdfe_infprot_chmdfe
   WHERE a.notification_type = 1
   ORDER BY c.evento_infevento_dhregpassagem DESC;
 
