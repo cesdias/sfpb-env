@@ -56,8 +56,8 @@ AS SELECT a.id,
     b.data_fechamento,
     b.criador,
     app.nonetexttonull(b.configuracao ->> 'placa'::text) AS placa,
-    app.nonetexttonull(regexp_replace(b.configuracao ->> 'valor'::text,',','.'))::double precision AS valor,
-    app.nonetexttonull(regexp_replace(b.configuracao ->> 'valor_nfe'::text,',','.'))::double precision AS valor_nfe,
+    app.nonetexttonull(regexp_replace(b.configuracao ->> 'valor'::text, ','::text, '.'::text))::double precision AS valor,
+    app.nonetexttonull(regexp_replace(b.configuracao ->> 'valor_nfe'::text, ','::text, '.'::text))::double precision AS valor_nfe,
     app.nonetexttonull(b.configuracao ->> 'cpf_condutor'::text) AS cpf_condutor,
     app.nonetexttonull(b.configuracao ->> 'cpf_emitente'::text) AS cpf_emitente,
     app.nonetexttonull(b.configuracao ->> 'cpf_destinatario'::text) AS cpf_destinatario,
@@ -89,8 +89,8 @@ AS SELECT a.id,
    FROM app.notificacoes a
      JOIN app.config_alertas b ON b.id_config = a.id_config
      JOIN app.fatoevento c ON a.id_evento = c.id
-     JOIN app.fatomdfe e ON e.protmdfe_infprot_chmdfe = a.protmdfe_infprot_chmdfe
-  WHERE a.notification_type = 1
+     JOIN app.fatomdfe e ON e.protmdfe_infprot_chmdfe::text = a.protmdfe_infprot_chmdfe::text
+  WHERE a.notification_type = 1 AND e.informix_stmdfeletronica = 'A'::bpchar
   ORDER BY c.evento_infevento_dhregpassagem DESC;
 
 GRANT ALL ON TABLE app.latest_notifications_dhregpassagem_view TO hasurauser; 
