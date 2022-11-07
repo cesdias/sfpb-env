@@ -85,7 +85,9 @@ AS SELECT a.id,
     c.evento_valor_tot_cmdfe,
     e.protmdfe_infprot_chmdfe,
     e.infmdfe_ide_ufini,
-    e.infmdfe_ide_uffim
+    e.infmdfe_ide_uffim,
+    b.severidade,
+    a.data_hora_cadastro
    FROM app.notificacoes a
      JOIN app.config_alertas b ON b.id_config = a.id_config
      JOIN app.fatoevento c ON a.id_evento = c.id

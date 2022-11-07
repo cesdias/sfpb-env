@@ -3,15 +3,16 @@
 
 -- Cria nova tabela para configuração de alertas
 CREATE TABLE app.config_alertas(
-      id_config SERIAL PRIMARY KEY,
-      configuracao JSON,
-      nome TEXT,
-      descricao TEXT,
-      group_id TEXT,
-      procedimentos TEXT,
-      data_criacao timestamp NULL,
+  id_config SERIAL PRIMARY KEY,
+  configuracao JSON,
+  nome TEXT,
+  descricao TEXT,
+  group_id TEXT,
+  procedimentos TEXT,
+  data_criacao timestamp NULL,
 	data_fechamento timestamp NULL,
-	criador text NULL
+	criador text NULL,
+  severidade int2 NULL DEFAULT 1,
 );
 
 CREATE or REPLACE FUNCTION app.noneTextToNull(text) RETURNS text
@@ -48,7 +49,8 @@ AS SELECT config_alertas.id_config,
     app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_emitente'::text) AS cnpj_emitente,
     app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_destinatario'::text) AS cnpj_destinatario,
     app.nonetexttonull(config_alertas.configuracao ->> 'cpf_emitente_nfe'::text) AS cpf_emitente_nfe,
-    app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_emitente_nfe'::text) AS cnpj_emitente_nfe
+    app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_emitente_nfe'::text) AS cnpj_emitente_nfe,
+    config_alertas.severidade
    FROM app.config_alertas;
    
 GRANT ALL ON TABLE app.config_alertas_view TO hasurauser; 
@@ -64,7 +66,10 @@ CREATE TABLE app.notificacoes(
       fiscal_responsavel varchar,
       notification_type smallint DEFAULT 1,
       infprot_chnfe bpchar(44),
-      protMDFe_infProt_chMDFe character varying(44)
+      protMDFe_infProt_chMDFe character varying(44),
+      data_hora_cadastro timestamp,
+      fiscal_responsavel_cadastro varchar,
+      data_criacao timestamp
 );
 
 GRANT USAGE ON SCHEMA app TO hasurauser;

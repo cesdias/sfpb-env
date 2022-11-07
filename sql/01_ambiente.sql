@@ -556,6 +556,7 @@ CREATE INDEX infnfe_det_imposto_icms_vbc_idx ON app.fatoitemnfe USING btree (inf
 CREATE INDEX infnfe_det_imposto_icms_vicms_idx ON app.fatoitemnfe USING btree (infnfe_det_imposto_icms_vicms);
 CREATE INDEX infnfe_det_imposto_icms_vbcst_idx ON app.fatoitemnfe USING btree (infnfe_det_imposto_icms_vbcst);
 CREATE INDEX infnfe_det_imposto_icms_vicmsst_idx ON app.fatoitemnfe USING btree (infnfe_det_imposto_icms_vicmsst);
+CREATE INDEX infnfe_det_prod_ncm_idx ON app.fatoitemnfe USING gin (infnfe_det_prod_ncm gin_trgm_ops);
 
 CREATE TABLE app.fatonfetransito (
 	id_fatonfe bigserial NOT NULL,
@@ -576,6 +577,7 @@ CREATE TABLE app.fatonfetransito (
 	infNFe_transp_reboque4_placa character varying(8),
 	infNFe_transp_reboque5_placa character varying(8),
 	infNFe_total_ICMSTot_vNF numeric(16,2),
+	infnfe_ide_nnf varchar NULL,
 	CONSTRAINT fatonfetransito_pkey PRIMARY KEY (infprot_chnfe)
 );
 CREATE INDEX fatonfetransito_id_idx ON app.fatonfetransito USING btree (id_fatonfe);
@@ -1369,7 +1371,8 @@ CREATE TABLE app.fatoevento(
     evento_infevento_sguf character varying(2),                             -- UF em que o evento aconteceu
     evento_infevento_tpsentido character varying(65),                       -- Sentido da rodovia onde o evento aconteceu
     evento_infevento_tpvia varchar,
-	evento_valor_tot_cmdfe float8											-- TODO: Identificar porpósito do campo
+	evento_valor_tot_cmdfe float8,											
+	data_recebimento timestamp NULL,
 );
 
 CREATE INDEX evento_infevento_dhregpassagem_idx ON app.fatoevento USING btree (evento_infevento_dhregpassagem);
