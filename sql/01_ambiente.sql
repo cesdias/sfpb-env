@@ -1372,7 +1372,7 @@ CREATE TABLE app.fatoevento(
     evento_infevento_tpsentido character varying(65),                       -- Sentido da rodovia onde o evento aconteceu
     evento_infevento_tpvia varchar,
 	evento_valor_tot_cmdfe float8,											
-	data_recebimento timestamp NULL,
+	data_recebimento timestamp NULL
 );
 
 CREATE INDEX evento_infevento_dhregpassagem_idx ON app.fatoevento USING btree (evento_infevento_dhregpassagem);

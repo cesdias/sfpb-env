@@ -12,7 +12,7 @@ CREATE TABLE app.config_alertas(
   data_criacao timestamp NULL,
 	data_fechamento timestamp NULL,
 	criador text NULL,
-  severidade int2 NULL DEFAULT 1,
+  severidade int2 NULL DEFAULT 1
 );
 
 CREATE or REPLACE FUNCTION app.noneTextToNull(text) RETURNS text
