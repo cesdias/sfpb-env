@@ -544,6 +544,7 @@ CREATE TABLE app.fatoitemnfe(
 );
 CREATE INDEX fatoitemnfe_id_idx ON app.fatoitemnfe USING btree (id_fatoitemnfe);
 CREATE INDEX fatoitemnfe_infprot_chnfe_idx ON app.fatoitemnfe USING btree (infprot_chnfe);
+CREATE INDEX infNFe_det_prod_NCM_idx ON app.fatoitemnfe USING gin (infNFe_det_prod_NCM gin_trgm_ops);
 CREATE INDEX infnfe_det_prod_xprod_idx ON app.fatoitemnfe USING gin (infnfe_det_prod_xprod gin_trgm_ops);
 CREATE INDEX infnfe_det_prod_qcom_idx ON app.fatoitemnfe USING btree (infnfe_det_prod_qcom);
 CREATE INDEX infnfe_det_prod_vuncom_idx ON app.fatoitemnfe USING btree (infnfe_det_prod_vuncom);
@@ -577,7 +578,7 @@ CREATE TABLE app.fatonfetransito (
 	infNFe_transp_reboque4_placa character varying(8),
 	infNFe_transp_reboque5_placa character varying(8),
 	infNFe_total_ICMSTot_vNF numeric(16,2),
-	infnfe_ide_nnf varchar NULL,
+	infNFe_ide_nNF character varying,
 	CONSTRAINT fatonfetransito_pkey PRIMARY KEY (infprot_chnfe)
 );
 CREATE INDEX fatonfetransito_id_idx ON app.fatonfetransito USING btree (id_fatonfe);

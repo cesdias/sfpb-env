@@ -12,6 +12,8 @@ CREATE INDEX eventos_mdfe_id_evento_idx ON app.eventos_mdfe USING btree (id_even
 GRANT ALL ON TABLE app.eventos_mdfe TO postgres;
 GRANT ALL ON TABLE app.eventos_mdfe TO hasurauser;
 
+
+
 CREATE OR REPLACE VIEW app.evento_passagem_mdfe_view
 AS SELECT e.id,
     e.evento_chdfe,
