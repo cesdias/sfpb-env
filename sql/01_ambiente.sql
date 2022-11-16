@@ -1378,7 +1378,24 @@ CREATE TABLE app.fatoevento(
 
 CREATE INDEX evento_infevento_dhregpassagem_idx ON app.fatoevento USING btree (evento_infevento_dhregpassagem);
 CREATE INDEX evento_infevento_dhregpassagem_DESC_idx ON app.fatoevento (evento_infevento_dhregpassagem DESC NULLS LAST);
+CREATE INDEX evento_infevento_nrplaca_idx ON app.fatoevento USING btree (evento_infevento_nrplaca);
 
+
+CREATE FUNCTION app.check_redundant_event() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+  	IF EXISTS (SELECT 1 FROM app.fatoevento WHERE evento_chdfe = new.evento_chdfe and evento_tipo_dfe = new.evento_tipo_dfe and evento_infevento_dhregpassagem = new.evento_infevento_dhregpassagem and 
+  	  evento_infevento_dsreflocal = new.evento_infevento_dsreflocal and evento_infevento_nrplaca = new.evento_infevento_nrplaca and 
+  	  evento_infevento_nrkmrodovia = new.evento_infevento_nrkmrodovia and  evento_valor_tot_cmdfe = new.evento_valor_tot_cmdfe ) 
+  	THEN
+            RETURN NULL;
+    ELSE
+            RETURN NEW;
+    END IF;
+END;$$;
+
+CREATE TRIGGER check_valid_event BEFORE INSERT ON app.fatoevento
+FOR EACH ROW EXECUTE PROCEDURE app.check_redundant_event();
 																				
 
 
