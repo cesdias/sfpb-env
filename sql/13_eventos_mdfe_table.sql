@@ -93,8 +93,8 @@ AS SELECT a.id,
    FROM app.notificacoes a
      JOIN app.config_alertas b ON b.id_config = a.id_config
      JOIN app.fatoevento c ON a.id_evento = c.id
-     JOIN app.fatomdfe e ON e.protmdfe_infprot_chmdfe::text = a.protmdfe_infprot_chmdfe::text
-  WHERE a.notification_type = 1 AND e.informix_stmdfeletronica = 'A'::bpchar
+     LEFT JOIN app.fatomdfe e ON e.protmdfe_infprot_chmdfe::text = a.protmdfe_infprot_chmdfe::text
+  WHERE a.notification_type = 1 AND (e.informix_stmdfeletronica = 'A'::bpchar  or e.informix_stmdfeletronica is null)
   ORDER BY c.evento_infevento_dhregpassagem DESC;
 
 GRANT ALL ON TABLE app.latest_notifications_dhregpassagem_view TO hasurauser; 

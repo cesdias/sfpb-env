@@ -56,6 +56,39 @@ AS SELECT config_alertas.id_config,
 GRANT ALL ON TABLE app.config_alertas_view TO hasurauser; 
 GRANT ALL ON TABLE app.config_alertas_view TO postgres;
 
+
+-- app.fiscal definition
+
+-- Drop table
+
+-- DROP TABLE app.fiscal;
+
+CREATE TABLE app.events_stats (
+	matricula_fiscal varchar NOT NULL,
+	nome_fiscal text NOT NULL,
+	gerencia_fiscal text NULL,
+	funcao_fiscal text NULL,
+	telefone_fiscal text NULL,
+	CONSTRAINT fiscal_pk PRIMARY KEY (matricula_fiscal)
+);
+
+GRANT ALL ON TABLE app.fiscal TO hasurauser; 
+GRANT ALL ON TABLE app.fiscal TO postgres;
+
+
+CREATE TABLE app.fiscal (
+	matricula_fiscal varchar NOT NULL,
+	nome_fiscal text NOT NULL,
+	gerencia_fiscal text NULL,
+	funcao_fiscal text NULL,
+	telefone_fiscal text NULL,
+	CONSTRAINT fiscal_pk PRIMARY KEY (matricula_fiscal)
+);
+
+GRANT ALL ON TABLE app.fiscal TO hasurauser; 
+GRANT ALL ON TABLE app.fiscal TO postgres;
+
+
 -- Cria nova tabela de notificações
 CREATE TABLE app.notificacoes(
       id BIGSERIAL PRIMARY KEY,
@@ -64,6 +97,7 @@ CREATE TABLE app.notificacoes(
       acao_realizada varchar,
       data_hora timestamp,
       fiscal_responsavel varchar,
+      fiscal_responsavel2 varchar,
       notification_type smallint DEFAULT 1,
       infprot_chnfe bpchar(44),
       protMDFe_infProt_chMDFe character varying(44),
