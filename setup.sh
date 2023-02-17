@@ -98,6 +98,13 @@ else
     echo -e "${GREEN}Done!${NC} ✅"
 fi
 
+
+if [[ $(docker inspect --format='{{.State.Running}}' $(docker ps -aqf name='datalake')) == 'false' ]]; then 
+	echo -e "O container do postgres não está em execução, seu status é: ${RED} $(docker inspect --format='{{.State.Status}}' $(docker ps -aqf name='datalake')) ${NC}"
+	echo -e "Verifique seu log com:\033[2m docker logs $(docker ps -aqf name='datalake') ${NC}"
+fi
+
+
 echo -e ""
 echo -e "⚙️  Wait a few seconds while Hasura Endpoint is being deployed..."
 count=1
@@ -107,6 +114,10 @@ while true; do
       sleep 45
    else
       break
+   fi
+   if [[ $(docker inspect --format='{{.State.Running}}' $(docker ps -aqf name='datalake')) == 'false' ]]; then 
+      echo -e "O container do postgres não está em execução, seu status é:${RED} $(docker inspect --format='{{.State.Status}}' $(docker ps -aqf name='datalake')) ${NC}"
+	  echo -e "Verifique seu log com:\033[2m docker logs $(docker ps -aqf name='datalake') ${NC}"
    fi
    if [ $count -eq 5 ]; then
       echo -e ""

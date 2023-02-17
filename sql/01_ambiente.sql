@@ -544,7 +544,7 @@ CREATE TABLE app.fatoitemnfe(
 );
 CREATE INDEX fatoitemnfe_id_idx ON app.fatoitemnfe USING btree (id_fatoitemnfe);
 CREATE INDEX fatoitemnfe_infprot_chnfe_idx ON app.fatoitemnfe USING btree (infprot_chnfe);
-CREATE INDEX infNFe_det_prod_NCM_idx ON app.fatoitemnfe USING gin (infNFe_det_prod_NCM gin_trgm_ops);
+CREATE INDEX infnfe_det_prod_ncm_idx ON app.fatoitemnfe USING gin (infnfe_det_prod_ncm gin_trgm_ops);
 CREATE INDEX infnfe_det_prod_xprod_idx ON app.fatoitemnfe USING gin (infnfe_det_prod_xprod gin_trgm_ops);
 CREATE INDEX infnfe_det_prod_qcom_idx ON app.fatoitemnfe USING btree (infnfe_det_prod_qcom);
 CREATE INDEX infnfe_det_prod_vuncom_idx ON app.fatoitemnfe USING btree (infnfe_det_prod_vuncom);
@@ -557,7 +557,7 @@ CREATE INDEX infnfe_det_imposto_icms_vbc_idx ON app.fatoitemnfe USING btree (inf
 CREATE INDEX infnfe_det_imposto_icms_vicms_idx ON app.fatoitemnfe USING btree (infnfe_det_imposto_icms_vicms);
 CREATE INDEX infnfe_det_imposto_icms_vbcst_idx ON app.fatoitemnfe USING btree (infnfe_det_imposto_icms_vbcst);
 CREATE INDEX infnfe_det_imposto_icms_vicmsst_idx ON app.fatoitemnfe USING btree (infnfe_det_imposto_icms_vicmsst);
-CREATE INDEX infnfe_det_prod_ncm_idx ON app.fatoitemnfe USING gin (infnfe_det_prod_ncm gin_trgm_ops);
+
 
 CREATE TABLE app.fatonfetransito (
 	id_fatonfe bigserial NOT NULL,

@@ -63,17 +63,17 @@ GRANT ALL ON TABLE app.config_alertas_view TO postgres;
 
 -- DROP TABLE app.fiscal;
 
-CREATE TABLE app.events_stats (
-	matricula_fiscal varchar NOT NULL,
-	nome_fiscal text NOT NULL,
-	gerencia_fiscal text NULL,
-	funcao_fiscal text NULL,
-	telefone_fiscal text NULL,
-	CONSTRAINT fiscal_pk PRIMARY KEY (matricula_fiscal)
-);
+-- CREATE TABLE app.events_stats (
+-- 	matricula_fiscal varchar NOT NULL,
+-- 	nome_fiscal text NOT NULL,
+-- 	gerencia_fiscal text NULL,
+-- 	funcao_fiscal text NULL,
+-- 	telefone_fiscal text NULL,
+-- 	CONSTRAINT fiscal_pk PRIMARY KEY (matricula_fiscal)
+-- );
 
-GRANT ALL ON TABLE app.fiscal TO hasurauser; 
-GRANT ALL ON TABLE app.fiscal TO postgres;
+-- GRANT ALL ON TABLE app.events_stats TO hasurauser; 
+-- GRANT ALL ON TABLE app.events_stats TO postgres;
 
 
 CREATE TABLE app.fiscal (
