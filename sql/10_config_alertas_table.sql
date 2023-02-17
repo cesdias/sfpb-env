@@ -58,23 +58,8 @@ GRANT ALL ON TABLE app.config_alertas_view TO postgres;
 
 
 -- app.fiscal definition
-
 -- Drop table
-
 -- DROP TABLE app.fiscal;
-
--- CREATE TABLE app.events_stats (
--- 	matricula_fiscal varchar NOT NULL,
--- 	nome_fiscal text NOT NULL,
--- 	gerencia_fiscal text NULL,
--- 	funcao_fiscal text NULL,
--- 	telefone_fiscal text NULL,
--- 	CONSTRAINT fiscal_pk PRIMARY KEY (matricula_fiscal)
--- );
-
--- GRANT ALL ON TABLE app.events_stats TO hasurauser; 
--- GRANT ALL ON TABLE app.events_stats TO postgres;
-
 
 CREATE TABLE app.fiscal (
 	matricula_fiscal varchar NOT NULL,
@@ -88,6 +73,36 @@ CREATE TABLE app.fiscal (
 GRANT ALL ON TABLE app.fiscal TO hasurauser; 
 GRANT ALL ON TABLE app.fiscal TO postgres;
 
+-- app.event_badstats definition
+-- Drop table
+-- DROP TABLE app.event_badstats;
+
+CREATE TABLE app.event_badstats (
+	id varchar NOT NULL,
+	cameralocation varchar NOT NULL,
+	analysis_date date NOT NULL,
+	time_slice int4 NOT NULL,
+	quantity int4 NULL,
+	CONSTRAINT event_badstats_pk PRIMARY KEY (id)
+);
+
+GRANT ALL ON TABLE app.event_badstats TO hasurauser; 
+GRANT ALL ON TABLE app.event_badstats TO postgres;
+-- app.event_stats definition
+-- Drop table
+-- DROP TABLE app.event_stats;
+
+CREATE TABLE app.event_stats (
+	cameralocation varchar NOT NULL,
+	analysis_date date NOT NULL,
+	time_slice int4 NOT NULL,
+	quantity int4 NOT NULL DEFAULT 0,
+	delay float8 NULL,
+	CONSTRAINT event_stats_pk PRIMARY KEY (cameralocation, analysis_date, time_slice)
+);
+
+GRANT ALL ON TABLE app.event_stats TO hasurauser; 
+GRANT ALL ON TABLE app.event_stats TO postgres;
 
 -- Cria nova tabela de notificações
 CREATE TABLE app.notificacoes(
