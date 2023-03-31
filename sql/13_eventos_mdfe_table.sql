@@ -35,15 +35,12 @@ AS SELECT e.id,
     e.evento_valor_tot_cmdfe,
     f.protmdfe_infprot_chmdfe,
     f.infmdfe_ide_ufini,
-    f.infmdfe_ide_uffim
+    f.infmdfe_ide_uffim,
+    e.data_recebimento
    FROM app.fatoevento e
      JOIN app.eventos_mdfe a ON e.id = a.id_evento
      JOIN app.fatomdfe f ON f.protmdfe_infprot_chmdfe::text = a.chave_mdfe::text
   ORDER BY e.evento_infevento_dhregpassagem DESC;
-
-GRANT ALL ON TABLE app.evento_passagem_mdfe_view TO postgres;
-GRANT ALL ON TABLE app.evento_passagem_mdfe_view TO hasurauser;
-
 CREATE OR REPLACE VIEW app.latest_notifications_dhregpassagem_view
 AS SELECT a.id,
     a.acao_realizada,
@@ -52,21 +49,21 @@ AS SELECT a.id,
     b.id_config,
     b.nome,
     b.descricao,
-    b.group_id,
+    b.visibility_groups AS group_id,
     b.procedimentos,
     b.data_criacao,
     b.data_fechamento,
     b.criador,
-    app.nonetexttonull(b.configuracao ->> 'placa'::text) AS placa,
-    app.nonetexttonull(regexp_replace(b.configuracao ->> 'valor'::text, ','::text, '.'::text))::double precision AS valor,
-    app.nonetexttonull(regexp_replace(b.configuracao ->> 'valor_nfe'::text, ','::text, '.'::text))::double precision AS valor_nfe,
-    app.nonetexttonull(b.configuracao ->> 'cpf_condutor'::text) AS cpf_condutor,
-    app.nonetexttonull(b.configuracao ->> 'cpf_emitente'::text) AS cpf_emitente,
-    app.nonetexttonull(b.configuracao ->> 'cpf_destinatario'::text) AS cpf_destinatario,
-    app.nonetexttonull(b.configuracao ->> 'cnpj_emitente'::text) AS cnpj_emitente,
-    app.nonetexttonull(b.configuracao ->> 'cnpj_destinatario'::text) AS cnpj_destinatario,
-    app.nonetexttonull(b.configuracao ->> 'cpf_emitente_nfe'::text) AS cpf_emitente_nfe,
-    app.nonetexttonull(b.configuracao ->> 'cnpj_emitente_nfe'::text) AS cnpj_emitente_nfe,
+    b.placa,
+    b.valor,
+    b.valor_nfe,
+    b.cpf_condutor,
+    b.cpf_emitente,
+    b.cpf_destinatario,
+    b.cnpj_emitente,
+    b.cnpj_destinatario,
+    b.cpf_emitente_nfe,
+    b.cnpj_emitente_nfe,
     c.id AS id_evento,
     c.evento_chdfe,
     c.evento_tipo_dfe,
@@ -89,13 +86,72 @@ AS SELECT a.id,
     e.infmdfe_ide_ufini,
     e.infmdfe_ide_uffim,
     b.severidade,
-    a.data_hora_cadastro
-   FROM app.notificacoes a
-     JOIN app.config_alertas b ON b.id_config = a.id_config
+    a.data_hora_cadastro,
+    c.data_recebimento
+   FROM (select * from app.notificacoes WHERE notification_type = 1) as a
+     JOIN app.config_alertas_view2 b ON b.id_config = a.id_config
      JOIN app.fatoevento c ON a.id_evento = c.id
-     LEFT JOIN app.fatomdfe e ON e.protmdfe_infprot_chmdfe::text = a.protmdfe_infprot_chmdfe::text
-  WHERE a.notification_type = 1 AND (e.informix_stmdfeletronica = 'A'::bpchar  or e.informix_stmdfeletronica is null)
-  ORDER BY c.evento_infevento_dhregpassagem DESC;
+     LEFT JOIN app.fatomdfe e ON e.protmdfe_infprot_chmdfe = a.protmdfe_infprot_chmdfe  
+  ORDER BY a.id  DESC;
+ 
+CREATE INDEX notification_type_idx ON app.notificacoes USING btree (notification_type) WHERE (notification_type = 1);
 
-GRANT ALL ON TABLE app.latest_notifications_dhregpassagem_view TO hasurauser; 
-GRANT ALL ON TABLE app.latest_notifications_dhregpassagem_view TO postgres;
+CREATE OR REPLACE VIEW app.nfe_notifications_view
+AS SELECT n.id,
+    n.id_evento,
+    n.acao_realizada,
+    n.data_hora,
+    n.fiscal_responsavel,
+    n.notification_type,
+    n.protmdfe_infprot_chmdfe,
+    n.data_hora_cadastro,
+    n.fiscal_responsavel_cadastro,
+    n.data_criacao AS notification_creation,
+    f.id_fatonfe,
+    f.infnfe_sqn,
+    f.infprot_chnfe,
+    f.infnfe_ide,
+    f.infnfe_ide_mod,
+    f.infnfe_ide_dhemi,
+    f.infnfe_ide_dhsaient,
+    f.infnfe_emit_cnpj,
+    f.infnfe_emit_cpf,
+    f.infnfe_dest_cnpj,
+    f.infnfe_dest_cpf,
+    f.infnfe_transp_veictransp_placa,
+    f.infnfe_transp_reboque1_placa,
+    f.infnfe_transp_reboque2_placa,
+    f.infnfe_transp_reboque3_placa,
+    f.infnfe_transp_reboque4_placa,
+    f.infnfe_transp_reboque5_placa,
+    f.infnfe_total_icmstot_vnf,
+    f.infnfe_ide_nnf,
+    cav.id_config,
+    cav.nome,
+    cav.descricao,
+    cav.visibility_groups,
+    cav.procedimentos,
+    cav.data_criacao,
+    cav.data_fechamento,
+    cav.criador,
+    cav.placa,
+    cav.valor,
+    cav.valor_nfe,
+    cav.cpf_condutor,
+    cav.cpf_emitente,
+    cav.cpf_destinatario,
+    cav.cnpj_emitente,
+    cav.cnpj_destinatario,
+    cav.cpf_emitente_nfe,
+    cav.cnpj_emitente_nfe,
+    cav.severidade,
+    cav.config_status,
+    cav.config_modification_date,
+    cav.config_modification_user
+   FROM app.notificacoes n
+     JOIN app.fatonfetransito f ON n.infprot_chnfe = f.infprot_chnfe
+     JOIN app.config_alertas_view2 cav ON n.id_config = cav.id_config
+  WHERE n.notification_type = 2
+  ORDER BY n.id DESC;
+  
+ 

@@ -12,8 +12,21 @@ CREATE TABLE app.config_alertas(
   data_criacao timestamp NULL,
 	data_fechamento timestamp NULL,
 	criador text NULL,
-  severidade smallint NULL DEFAULT 1
+  severidade smallint NULL DEFAULT 1,
+  config_status int2 default 1,
+  config_modification_date timestamp NULL,
+  config_modification_user text null
 );
+
+CREATE TABLE app.config_alertas_grupos (
+	id_config int4 NOT NULL,
+	group_id int4 NOT NULL,
+	CONSTRAINT config_alertas_grupos_pk PRIMARY KEY (id_config, group_id)
+);
+CREATE INDEX group_id_id_config_idx ON app.config_alertas_grupos USING btree (group_id);
+CREATE INDEX id_config_group_idx ON app.config_alertas_grupos USING btree (id_config);
+
+
 
 CREATE or REPLACE FUNCTION app.noneTextToNull(text) RETURNS text
 AS $$
@@ -41,8 +54,8 @@ AS SELECT config_alertas.id_config,
     config_alertas.data_fechamento,
     config_alertas.criador,
     app.nonetexttonull(config_alertas.configuracao ->> 'placa'::text) AS placa,
-    app.nonetexttonull(regexp_replace(config_alertas.configuracao ->> 'valor'::text,',','.'))::double precision AS valor,
-    app.nonetexttonull(regexp_replace(config_alertas.configuracao ->> 'valor_nfe'::text,',','.'))::double precision AS valor_nfe,
+    app.nonetexttonull(regexp_replace(config_alertas.configuracao ->> 'valor'::text, ','::text, '.'::text))::double precision AS valor,
+    app.nonetexttonull(regexp_replace(config_alertas.configuracao ->> 'valor_nfe'::text, ','::text, '.'::text))::double precision AS valor_nfe,
     app.nonetexttonull(config_alertas.configuracao ->> 'cpf_condutor'::text) AS cpf_condutor,
     app.nonetexttonull(config_alertas.configuracao ->> 'cpf_emitente'::text) AS cpf_emitente,
     app.nonetexttonull(config_alertas.configuracao ->> 'cpf_destinatario'::text) AS cpf_destinatario,
@@ -50,11 +63,66 @@ AS SELECT config_alertas.id_config,
     app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_destinatario'::text) AS cnpj_destinatario,
     app.nonetexttonull(config_alertas.configuracao ->> 'cpf_emitente_nfe'::text) AS cpf_emitente_nfe,
     app.nonetexttonull(config_alertas.configuracao ->> 'cnpj_emitente_nfe'::text) AS cnpj_emitente_nfe,
-    config_alertas.severidade
+    config_alertas.severidade,
+    config_alertas.config_status,
+    config_alertas.config_modification_date,
+    config_alertas.config_modification_user
    FROM app.config_alertas;
    
 GRANT ALL ON TABLE app.config_alertas_view TO hasurauser; 
 GRANT ALL ON TABLE app.config_alertas_view TO postgres;
+
+create materialized view app.config_alertas_view2
+as SELECT conf.id_config,
+    conf.nome,
+    conf.descricao,
+    string_agg(ug.group_id::text, ',') as visibility_groups,
+    conf.procedimentos,
+    conf.data_criacao,
+    conf.data_fechamento,
+    conf.criador,
+    app.nonetexttonull(conf.configuracao ->> 'placa'::text) AS placa,
+    app.nonetexttonull(regexp_replace(conf.configuracao ->> 'valor'::text, ','::text, '.'::text))::double precision AS valor,
+    app.nonetexttonull(regexp_replace(conf.configuracao ->> 'valor_nfe'::text, ','::text, '.'::text))::double precision AS valor_nfe,
+    app.nonetexttonull(conf.configuracao ->> 'cpf_condutor'::text) AS cpf_condutor,
+    app.nonetexttonull(conf.configuracao ->> 'cpf_emitente'::text) AS cpf_emitente,
+    app.nonetexttonull(conf.configuracao ->> 'cpf_destinatario'::text) AS cpf_destinatario,
+    app.nonetexttonull(conf.configuracao ->> 'cnpj_emitente'::text) AS cnpj_emitente,
+    app.nonetexttonull(conf.configuracao ->> 'cnpj_destinatario'::text) AS cnpj_destinatario,
+    app.nonetexttonull(conf.configuracao ->> 'cpf_emitente_nfe'::text) AS cpf_emitente_nfe,
+    app.nonetexttonull(conf.configuracao ->> 'cnpj_emitente_nfe'::text) AS cnpj_emitente_nfe,
+    conf.severidade, 
+    conf.config_status,
+	conf.config_modification_date,
+	conf.config_modification_user
+   FROM app.config_alertas as conf
+	  INNER JOIN app.config_alertas_grupos as ug 
+	ON conf.id_config = ug.id_config
+	where conf.config_status != 3
+	GROUP BY conf.id_config
+	with data;
+
+CREATE INDEX id_config_view_btree_idx ON app.config_alertas_view2 USING btree (id_config);
+CREATE UNIQUE INDEX id_config_view_idx ON app.config_alertas_view2 USING btree (id_config); 
+
+CREATE OR REPLACE FUNCTION app.func_refresh_view()
+RETURNS trigger LANGUAGE plpgsql 
+SECURITY DEFINER
+AS $$
+BEGIN
+    REFRESH MATERIALIZED VIEW CONCURRENTLY app.config_alertas_view2;
+    RETURN NULL;
+END;
+$$;
+
+CREATE TRIGGER func_refresh_view AFTER INSERT OR UPDATE OR DELETE
+ON app.config_alertas 
+FOR EACH STATEMENT EXECUTE PROCEDURE app.func_refresh_view();
+
+
+CREATE TRIGGER func_refresh_view AFTER INSERT OR UPDATE OR DELETE
+ON app.config_alertas_grupos 
+FOR EACH STATEMENT EXECUTE PROCEDURE app.func_refresh_view();
 
 
 -- app.fiscal definition

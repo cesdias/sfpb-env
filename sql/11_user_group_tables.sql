@@ -3,22 +3,39 @@
 
 
 -- Cria nova tabela Grupo
-CREATE TABLE app.grupo(
-    group_id TEXT PRIMARY KEY,
-    chat_id TEXT,
-    nome TEXT
+CREATE TABLE app.grupo (
+	group_id serial NOT null primary key,	
+	group_name text NULL,
+	group_description text NULL,
+	group_owner text NULL,
+	group_type int2 NULL,
+	group_status int2 NULL,
+	group_creation_date timestamp null,
+	group_modification_date timestamp null,
+	group_modification_user text null,
+	chat_id text NULL,
+	chat_name text null,
+	chat_link text null,		
+	chat_creation_date timestamp null,
+	chat_creation_status int2 NULL
+
 );
 
 -- Cria nova tabela Usuario
-CREATE TABLE app.usuario(
-    user_id TEXT PRIMARY KEY,
-    nome TEXT
+create table app.usuario (
+	user_id serial4 NOT null primary key,
+	user_login text null unique,
+	user_registration_id varchar null unique,
+	user_name text NULL,
+	user_department text NULL,
+	user_role text NULL,
+	user_phone text null
 );
 
 -- Cria nova tabela Usuario Grupo
-CREATE TABLE app.usuario_grupo(
-    user_id TEXT,
-    group_id TEXT
+CREATE TABLE app.usuario_grupo (
+	user_id int4 NULL,
+	group_id int4 NULL
 );
 
 -- Cria nova tabela Municipio
