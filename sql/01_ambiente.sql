@@ -1027,9 +1027,9 @@ CREATE TABLE app.fatomdfe(
 	infMDFe_ide_verProc character varying(20),
 	infMDFe_ide_UFIni character varying(2),
 	infMDFe_ide_UFFim character varying(2),
-	/*infMDFe_ide_infMunCarrega_cMunCarrega character varying(7),
+	infMDFe_ide_infMunCarrega_cMunCarrega character varying(7),
 	infMDFe_ide_infMunCarrega_xMunCarrega character varying(60),
-	infMDFe_ide_infPerCurso_UFPer character varying(2),*/
+	infMDFe_ide_infPerCurso_UFPer character varying(2),
 	infMDFe_ide_dhIniViagem timestamp with time zone,
 	infMDFe_ide_indCanalVerde char(1),
 	infMDFe_ide_indCarregaPosterior char(1),

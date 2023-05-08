@@ -12,7 +12,12 @@ CREATE INDEX eventos_mdfe_id_evento_idx ON app.eventos_mdfe USING btree (id_even
 GRANT ALL ON TABLE app.eventos_mdfe TO postgres;
 GRANT ALL ON TABLE app.eventos_mdfe TO hasurauser;
 
-
+CREATE TABLE app.heartbeat_log (
+	consumer_name text NOT NULL,
+	time_of_heartbeat timestamp NOT NULL,
+	topic text NULL,
+	last_date_of_message timestamp NULL
+);
 
 CREATE OR REPLACE VIEW app.evento_passagem_mdfe_view
 AS SELECT e.id,
@@ -41,6 +46,7 @@ AS SELECT e.id,
      JOIN app.eventos_mdfe a ON e.id = a.id_evento
      JOIN app.fatomdfe f ON f.protmdfe_infprot_chmdfe::text = a.chave_mdfe::text
   ORDER BY e.evento_infevento_dhregpassagem DESC;
+
 CREATE OR REPLACE VIEW app.latest_notifications_dhregpassagem_view
 AS SELECT a.id,
     a.acao_realizada,
@@ -154,4 +160,13 @@ AS SELECT n.id,
   WHERE n.notification_type = 2
   ORDER BY n.id DESC;
   
- 
+ CREATE TABLE app.police_car_location (
+	police_car_id text NOT NULL,
+	police_car_name text NULL,
+	police_car_description text NULL,
+	police_car_modification_date timestamp NULL,
+	police_car_lat float8 NULL,
+	police_car_lng float8 NULL,
+	police_car_accuracy int4 NULL,
+	CONSTRAINT police_car_pkey PRIMARY KEY (police_car_id)
+);
